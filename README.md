@@ -11,9 +11,10 @@ taskite is a simple task management application built with React and Tailwind CS
 
 ## Technologies Used
 
+- Font Awesome
 - React
+- React DnD
 - Tailwind CSS
-- React Drag and Drop (react-dnd)
 
 ## Getting Started
 
