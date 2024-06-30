@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDrag } from "react-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+import classNames from "classnames";
 
-const Task = ({ onDelete, onUpdateStatus, task }) => {
-  const [showStatusDrodpown, setShowStatusDropdown] = useState(false);
+const Task = ({
+  isOver,
+  onDelete,
+  onUpdateContent,
+  onUpdateCreated,
+  onUpdateStatus,
+  task,
+}) => {
   const [{ isDragging }, drag] = useDrag({
     type: "TASK",
     item: { id: task.id, status: task.status },
@@ -12,60 +19,164 @@ const Task = ({ onDelete, onUpdateStatus, task }) => {
       isDragging: !!monitor.isDragging(),
     }),
   });
+  const [showMenu, setShowMenu] = useState(false);
+  const inputRef = useRef(null);
+  const textRef = useRef(null);
+
+  const handleBlur = () => {
+    const input = inputRef.current;
+
+    if (!input) {
+      return;
+    }
+
+    input.disabled = true;
+    setShowMenu(false);
+  };
 
   const handleStatusChange = (event) => {
-    const shouldUpdateStatus = window.confirm(
-      `Are you sure you want to update the status of this task from ${task.status} to ${event.target.value}?`
-    );
-
-    if (shouldUpdateStatus && task.status !== event.target.value) {
+    if (task.status !== event.target.value) {
       onUpdateStatus(task.id, event.target.value);
     }
   };
 
+  const handleTextChange = (e) => {
+    const text = textRef.current;
+    const input = e.target;
+    const value = input.value;
+
+    if (e.key === "Tab" || e.key === "Enter" || e.type === "blur") {
+      e.preventDefault();
+
+      const _value = value === "" ? "New task" : value;
+
+      text.textContent = _value;
+      onUpdateContent(task, _value);
+      onUpdateCreated(task);
+      handleBlur();
+    }
+
+    text.textContent = value;
+    input.style.height = `${text.scrollHeight}px`;
+  };
+
+  const onUpdateText = () => {
+    const input = inputRef.current;
+
+    if (!input) {
+      return;
+    }
+
+    input.removeAttribute("disabled");
+    input.focus();
+    setShowMenu(false);
+  };
+
   useEffect(() => {
     if (isDragging) {
-      setShowStatusDropdown(false);
+      setShowMenu(false);
     }
   }, [isDragging]);
 
+  useEffect(() => {
+    const input = inputRef.current;
+
+    if (!input) {
+      return;
+    }
+
+    if (!task.created) {
+      input.removeAttribute("disabled");
+      input.focus();
+    }
+
+    const handleResize = () => {
+      const text = textRef.current;
+      const input = inputRef.current;
+
+      if (text) {
+        text.textContent = input.value;
+        input.style.height = `${text.scrollHeight}px`;
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+  }, [onUpdateCreated, task]);
+
   return (
     <div
-      className={`card py-6 px-6 ${
+      className={`bg-white rounded-md w-full relative p-4 ${
         isDragging ? "cursor-grabbing" : "cursor-grab"
       }`}
       ref={drag}
     >
-      {/* Task Control: Update Status or Delete Task */}
-      <div className="absolute top-6 right-6 flex items-center gap-x-4">
-        <button
-          className="font-bold text-blue-500 text-xl"
-          onClick={() => setShowStatusDropdown(!showStatusDrodpown)}
+      <div className="flex relative flex-col gap-4">
+        <span
+          className="absolute top-0 w-full -z-10 invisible left-0 min-h-8 break-words"
+          onClick={() => console.log("asdasd")}
+          ref={textRef}
         >
-          <FontAwesomeIcon icon={faPencil} />
-        </button>
+          {task.content}
+        </span>
+        <textarea
+          className="overflow-y-hidden bg-transparent w-full resize-none outline-none focus:outline-none"
+          defaultValue={task.created ? task.content : ""}
+          disabled={task.created}
+          name={task.id}
+          onBlur={(e) => handleTextChange(e)}
+          onChange={(e) => handleTextChange(e)}
+          onClick={() => console.log("asdfg")}
+          onKeyDown={(e) => handleTextChange(e)}
+          placeholder="New task"
+          ref={inputRef}
+          title="Task"
+          type="text"
+        />
         <button
-          className="font-bold text-red-500 text-xl"
-          onClick={() => onDelete(task.id)}
+          className={classNames(
+            "inline-flex w-auto leading-3 hover:text-orange-2 duration-200 ease-linear",
+            showMenu ? "text-orange-2" : "text-orange"
+          )}
+          onClick={() => setShowMenu(!showMenu)}
+          type="button"
         >
-          <FontAwesomeIcon icon={faTrash} />
+          •••
         </button>
       </div>
-      {/* Task title */}
-      <span>{task.content}</span>
-      {/* Task Control: Change Status Dropdown */}
-      <label className={showStatusDrodpown ? "flex mt-6 text-xl" : "hidden"}>
-        Status:
+      <div
+        className={classNames(
+          "mt-4 flex-col gap-4 text-sm lg:text-base items-start",
+          showMenu ? "flex" : "hidden"
+        )}
+      >
         <select
-          className="ml-2 flex-grow"
+          className="flex-grow w-full bg-transparent rounded-md outline-none focus:outline-none"
           value={task.status}
           onChange={handleStatusChange}
+          title="Change Status"
         >
           <option value="Backlog">Backlog</option>
           <option value="In Progress">In Progess</option>
           <option value="Done">Done</option>
         </select>
-      </label>
+        <button
+          className="btn-icon"
+          onClick={() => onUpdateText()}
+          title="Edit Title"
+          type="button"
+        >
+          <FontAwesomeIcon icon={faPencil} /> Edit title
+        </button>
+        <button
+          className="btn-icon"
+          onClick={() => onDelete(task.id)}
+          title="Delete Task"
+          type="button"
+        >
+          <FontAwesomeIcon icon={faTrash} /> Delete task
+        </button>
+      </div>
     </div>
   );
 };

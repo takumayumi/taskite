@@ -6,16 +6,20 @@
   html,
   body,
   #root {
-    @apply bg-gray-300 w-full h-full m-0 p-0;
-  }
-
-  body {
-    @apply font-[-apple-system,_BlinkMacSystemFont,_"Segoe_UI",_"Roboto",_"Oxygen",_"Ubuntu",_"Cantarell",_"Fira_Sans",_"Droid_Sans",_"Helvetica_Neue",_sans-serif] antialiased text-2xl;
+    @apply bg-blue text-indigo-2 w-full h-full m-0 p-0 font-poppins font-light text-base lg:text-lg;
   }
 }
 
-@layer utilities {
-  .card {
-    @apply bg-white shadow-md rounded-md w-full relative;
+@layer components {
+  .btn-icon {
+    @apply text-orange-2 flex items-center justify-start gap-4 w-full text-left;
+  }
+
+  .btn-icon svg {
+    @apply text-xs lg:text-sm;
+  }
+
+  .btn-txt {
+    @apply py-2 px-4 rounded-md text-white;
   }
 }

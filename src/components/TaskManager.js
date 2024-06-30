@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import TaskList from "./TaskList";
+import Prompt from "./Prompt";
 
 const statuses = ["Backlog", "In Progress", "Done"];
 
 const TaskManager = () => {
+  const [taskId, setTaskId] = useState(null);
+  const [showPrompt, setShowPrompt] = useState(false);
   const [tasks, setTasks] = useState(() => {
     const storedTasks = localStorage.getItem("tasks");
     return storedTasks ? JSON.parse(storedTasks) : {};
@@ -16,38 +19,58 @@ const TaskManager = () => {
   }, [tasks]);
 
   const handleAdd = (status) => {
-    const taskTitle = prompt("Enter task title:");
+    const newTask = {
+      id: Date.now().toString(),
+      content: "New task",
+      created: false,
+      status,
+    };
 
-    if (taskTitle) {
-      const newTask = {
-        id: Date.now().toString(),
-        content: taskTitle,
-        status,
-      };
-
-      setTasks((prevTasks) => ({
-        ...prevTasks,
-        [status]: [...(prevTasks[status] || []), newTask],
-      }));
-    }
+    setTasks((prevTasks) => ({
+      ...prevTasks,
+      [status]: [...(prevTasks[status] || []), newTask],
+    }));
   };
 
   const handleDelete = (taskId) => {
-    const shouldDelete = window.confirm(
-      "Are you sure you want to delete this task?"
-    );
+    setShowPrompt(true);
+    setTaskId(taskId);
+  };
 
-    if (shouldDelete) {
+  const handleUpdateContent = (task, content) => {
+    if (task) {
+      const id = task.id;
+      const status = task.status;
+
       setTasks((prevTasks) => {
-        const newTasks = { ...prevTasks };
+        const updatedTasks = { ...prevTasks };
 
-        Object.keys(newTasks).forEach((status) => {
-          newTasks[status] = newTasks[status].filter(
-            (task) => task.id !== taskId
+        if (updatedTasks[status]) {
+          updatedTasks[status] = updatedTasks[status].map((task) =>
+            task.id === id ? { ...task, content: content } : task
           );
-        });
+        }
 
-        return newTasks;
+        return updatedTasks;
+      });
+    }
+  };
+
+  const handleUpdateCreated = (task) => {
+    if (task) {
+      const id = task.id;
+      const status = task.status;
+
+      setTasks((prevTasks) => {
+        const updatedTasks = { ...prevTasks };
+
+        if (updatedTasks[status]) {
+          updatedTasks[status] = updatedTasks[status].map((task) =>
+            task.id === id ? { ...task, created: true } : task
+          );
+        }
+
+        return updatedTasks;
       });
     }
   };
@@ -75,27 +98,41 @@ const TaskManager = () => {
   };
 
   return (
-    <div className="py-20 px-10 lg:px-20 h-full flex flex-col">
-      {/* Title */}
-      <h1 className="text-center text-5xl font-bold underline bg-transparent mb-20">
-        taskite
-      </h1>
-      {/* Task List */}
-      <DndProvider backend={HTML5Backend}>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:flex-grow">
-          {statuses.map((status) => (
-            <TaskList
-              key={status}
-              tasks={tasks[status] || []}
-              status={status}
-              onAdd={handleAdd}
-              onDelete={handleDelete}
-              onUpdateStatus={handleUpdateStatus}
-            />
-          ))}
+    <>
+      <div className="pt-16 pb-20 px-5 overflow-y-auto lg:px-10 h-full w-full flex flex-col max-w-screen-xl mx-auto min-w-92.5 min-h-138">
+        {/* Title */}
+        <div className="relative inline-block mx-auto text-center text-5xl font-light mb-10 font-playwright">
+          <h1 className="text-indigo">taskite</h1>
+          <span className="absolute -top-0.5 -left-0.5 text-yellow">
+            taskite
+          </span>
         </div>
-      </DndProvider>
-    </div>
+        {/* Task List */}
+        <DndProvider backend={HTML5Backend}>
+          <div className="grid grid-cols-1 flex-1 md:grid-cols-3 gap-5 md:flex-grow overflow-hidden">
+            {statuses.map((status) => (
+              <TaskList
+                key={status}
+                tasks={tasks[status] || []}
+                status={status}
+                onAdd={handleAdd}
+                onDelete={handleDelete}
+                onUpdateContent={handleUpdateContent}
+                onUpdateCreated={handleUpdateCreated}
+                onUpdateStatus={handleUpdateStatus}
+              />
+            ))}
+          </div>
+        </DndProvider>
+      </div>
+      <Prompt
+        setShowPrompt={setShowPrompt}
+        setTaskId={setTaskId}
+        setTasks={setTasks}
+        showPrompt={showPrompt}
+        taskId={taskId}
+      />
+    </>
   );
 };
 
