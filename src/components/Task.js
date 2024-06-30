@@ -2,16 +2,18 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDrag } from "react-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import {
+  setShowPrompt,
+  toggleTask,
+  updateContent,
+  updateCreated,
+  updateStatus,
+} from "../redux/taskSlice";
 import classNames from "classnames";
 
-const Task = ({
-  isOver,
-  onDelete,
-  onUpdateContent,
-  onUpdateCreated,
-  onUpdateStatus,
-  task,
-}) => {
+const Task = ({ task }) => {
+  const dispatch = useDispatch();
   const [{ isDragging }, drag] = useDrag({
     type: "TASK",
     item: { id: task.id, status: task.status },
@@ -23,20 +25,16 @@ const Task = ({
   const inputRef = useRef(null);
   const textRef = useRef(null);
 
-  const handleBlur = () => {
-    const input = inputRef.current;
-
-    if (!input) {
-      return;
-    }
-
-    input.disabled = true;
-    setShowMenu(false);
+  const handleDelete = () => {
+    dispatch(toggleTask(task));
+    dispatch(setShowPrompt(true));
   };
 
-  const handleStatusChange = (event) => {
-    if (task.status !== event.target.value) {
-      onUpdateStatus(task.id, event.target.value);
+  const handleDropdown = (event) => {
+    const _value = event.target.value;
+
+    if (task.status !== _value) {
+      dispatch(updateStatus({ task, newStatus: _value }));
     }
   };
 
@@ -51,9 +49,9 @@ const Task = ({
       const _value = value === "" ? "New task" : value;
 
       text.textContent = _value;
-      onUpdateContent(task, _value);
-      onUpdateCreated(task);
-      handleBlur();
+      dispatch(updateContent({ task, content: _value }));
+      dispatch(updateCreated(task));
+      input.disabled = true;
     }
 
     text.textContent = value;
@@ -102,7 +100,7 @@ const Task = ({
 
     handleResize();
     window.addEventListener("resize", handleResize);
-  }, [onUpdateCreated, task]);
+  }, [task]);
 
   return (
     <div
@@ -114,7 +112,6 @@ const Task = ({
       <div className="flex relative flex-col gap-4">
         <span
           className="absolute top-0 w-full -z-10 invisible left-0 min-h-8 break-words"
-          onClick={() => console.log("asdasd")}
           ref={textRef}
         >
           {task.content}
@@ -126,7 +123,6 @@ const Task = ({
           name={task.id}
           onBlur={(e) => handleTextChange(e)}
           onChange={(e) => handleTextChange(e)}
-          onClick={() => console.log("asdfg")}
           onKeyDown={(e) => handleTextChange(e)}
           placeholder="New task"
           ref={inputRef}
@@ -151,9 +147,9 @@ const Task = ({
         )}
       >
         <select
-          className="flex-grow w-full bg-transparent rounded-md outline-none focus:outline-none"
+          className="flex-grow w-full text-orange-2 bg-transparent rounded-md outline-none focus:outline-none"
           value={task.status}
-          onChange={handleStatusChange}
+          onChange={handleDropdown}
           title="Change Status"
         >
           <option value="Backlog">Backlog</option>
@@ -170,7 +166,7 @@ const Task = ({
         </button>
         <button
           className="btn-icon"
-          onClick={() => onDelete(task.id)}
+          onClick={handleDelete}
           title="Delete Task"
           type="button"
         >

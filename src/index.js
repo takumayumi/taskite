@@ -1,14 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./assets/index.css";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 import TaskManager from "./components/TaskManager";
 import reportWebVitals from "./reportWebVitals";
+import "./assets/index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <TaskManager />
+    <Provider store={store}>
+      <TaskManager />
+    </Provider>
   </React.StrictMode>
 );
 

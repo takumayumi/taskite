@@ -1,31 +1,21 @@
+import { useSelector, useDispatch } from "react-redux";
+import { deleteTask, setShowPrompt, toggleTask } from "../redux/taskSlice";
 import classNames from "classnames";
 
-const Prompt = ({ setShowPrompt, setTaskId, setTasks, showPrompt, taskId }) => {
-  const onDelete = () => {
-    if (taskId) {
-      setTasks((prevTasks) => {
-        const newTasks = { ...prevTasks };
-
-        Object.keys(newTasks).forEach((status) => {
-          newTasks[status] = newTasks[status].filter(
-            (task) => task.id !== taskId
-          );
-        });
-
-        return newTasks;
-      });
-
-      setTaskId(null);
-    }
-  };
+const DeletePrompt = () => {
+  const dispatch = useDispatch();
+  const showPrompt = useSelector((state) => state.tasks.showPrompt);
+  const task = useSelector((state) => state.tasks.task);
 
   const handleConfirm = () => {
-    onDelete();
-    setShowPrompt(false);
+    dispatch(deleteTask(task));
+    dispatch(setShowPrompt(false));
+    dispatch(toggleTask(null));
   };
 
   const handleCancel = () => {
-    setShowPrompt(false);
+    dispatch(setShowPrompt(false));
+    dispatch(toggleTask(null));
   };
 
   return (
@@ -58,4 +48,4 @@ const Prompt = ({ setShowPrompt, setTaskId, setTasks, showPrompt, taskId }) => {
   );
 };
 
-export default Prompt;
+export default DeletePrompt;
