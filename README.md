@@ -21,11 +21,7 @@ Taskite is a simple task management application built with Create React App, Tai
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js and npm installed on your machine.
-
-### Installation
+Make sure you have Node.js and npm installed on your system. You can download them from [Node.js official website](https://nodejs.org/).
 
 1. Navigate to the project directory:
 
