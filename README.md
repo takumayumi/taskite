@@ -1,6 +1,6 @@
 # taskite
 
-Taskite is a simple task management application built with Create React App, Tailwind CSS, and Redux. It allows users to manage tasks with different statuses (Backlog, In Progress, Done) and provides features such as adding, updating, deleting tasks, and drag-and-drop functionality.
+taskite is a simple task management application built with Create React App, Tailwind CSS, and Redux. It allows users to manage tasks with different statuses (Backlog, In Progress, Done) and provides features such as adding, updating, deleting tasks, and drag-and-drop functionality.
 
 ## Features
 
