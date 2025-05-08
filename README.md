@@ -26,7 +26,7 @@ Make sure you have Node.js and npm installed on your system. You can download th
 1. Navigate to the project directory:
 
    ```bash
-   cd task-management-system
+   cd taskite
    ```
 
 2. Install dependencies:
