@@ -1,17 +1,13 @@
-import React, { useState } from "react";
 import { useDrop } from "react-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretUp, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
 import { addTask, updateStatus } from "../redux/taskSlice";
 import classNames from "classnames";
 import Task from "./Task";
 
 const TaskList = ({ status, tasks }) => {
   const dispatch = useDispatch();
-  const [isCollapsed, setCollapsed] = useState(
-    window.innerWidth < 768 ? false : true
-  );
   const [{ isOver }, drop] = useDrop({
     accept: "TASK",
     drop: (task) => dispatch(updateStatus({ task, newStatus: status })),
@@ -19,11 +15,6 @@ const TaskList = ({ status, tasks }) => {
       isOver: !!monitor.isOver(),
     }),
   });
-  const wWidth = useSelector((state) => state.tasks.wWidth);
-
-  const toggleCollapse = () => {
-    setCollapsed(!isCollapsed);
-  };
 
   return (
     <div
@@ -50,28 +41,11 @@ const TaskList = ({ status, tasks }) => {
         >
           <FontAwesomeIcon icon={faPlus} />
         </button>
-        <button
-          className="ml-auto block md:hidden"
-          onClick={toggleCollapse}
-          title={`${isCollapsed ? "Show" : "Hide"} ${status} Tasks`}
-          type="button"
-        >
-          <FontAwesomeIcon
-            className={classNames(
-              "transition-transform duration-100 ease-in",
-              isCollapsed ? "rotate-180" : ""
-            )}
-            icon={faCaretUp}
-          />
-        </button>
       </div>
       {/* Task List */}
       <div
         className={classNames(
-          "flex flex-col gap-2 [&::-webkit-scrollbar]:w-0 [&::-webkit-scrollbar]:bg-transparent",
-          isCollapsed || wWidth >= 768
-            ? "md:overflow-auto md:flex-[1_1_auto] md:min-h-0 h-full"
-            : "h-0 overflow-hidden"
+          "flex flex-col gap-2 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-yellow  overflow-auto max-h-72 md:max-h-full min-h-0 md:flex-[1_1_auto] [&::-webkit-scrollbar]:pl-1"
         )}
         ref={drop}
       >

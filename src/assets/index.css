@@ -12,7 +12,7 @@
 
 @layer components {
   .btn-icon {
-    @apply text-orange-2 flex items-center justify-start gap-4 w-full text-left;
+    @apply text-orange-2 flex items-center justify-between gap-4 w-full text-left;
   }
 
   .btn-icon svg {
@@ -21,5 +21,21 @@
 
   .btn-txt {
     @apply py-2 px-4 rounded-md text-white;
+  }
+
+  .btn-vintage {
+    @apply py-2 px-4 outline-none cursor-pointer relative bg-transparent touch-manipulation z-10 text-xs tracking-wide flex gap-2 items-center justify-center;
+  }
+
+  .btn-vintage:before {
+    @apply z-0 absolute content-[''] w-full h-full top-0 left-0 border-solid border-black border-2;
+  }
+
+  .btn-vintage:after {
+    @apply content-[''] bg-yellow-1 w-full -z-10 absolute h-full top-1 left-1 transition-all duration-100 ease-in;
+  }
+
+  .btn-vintage:hover:after {
+    @apply top-0 left-0;
   }
 }

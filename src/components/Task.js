@@ -27,7 +27,7 @@ const Task = ({ task }) => {
 
   const handleDelete = () => {
     dispatch(toggleTask(task));
-    dispatch(setShowPrompt(true));
+    dispatch(setShowPrompt("delete"));
   };
 
   const handleDropdown = (event) => {
@@ -131,7 +131,7 @@ const Task = ({ task }) => {
         />
         <button
           className={classNames(
-            "inline-flex w-auto leading-3 hover:text-orange-2 duration-200 ease-linear",
+            "inline-flex w-auto leading-3 justify-end hover:text-orange-2 duration-200 ease-linear",
             showMenu ? "text-orange-2" : "text-orange"
           )}
           onClick={() => setShowMenu(!showMenu)}
@@ -162,7 +162,7 @@ const Task = ({ task }) => {
           title="Edit Title"
           type="button"
         >
-          <FontAwesomeIcon icon={faPencil} /> Edit title
+          Edit title <FontAwesomeIcon icon={faPencil} />
         </button>
         <button
           className="btn-icon"
@@ -170,7 +170,7 @@ const Task = ({ task }) => {
           title="Delete Task"
           type="button"
         >
-          <FontAwesomeIcon icon={faTrash} /> Delete task
+          Delete task <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
     </div>

@@ -1,33 +1,40 @@
-import React, { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import DeletePrompt from "./DeletePrompt";
+import ExportButton from "./ExportButton";
+import ImportButton from "./ImportButton";
 import TaskList from "./TaskList";
 import { useDispatch, useSelector } from "react-redux";
-import { updateWWidth } from "../redux/taskSlice";
+import { updateWidth } from "../redux/taskSlice";
 import BMCIcon from "../assets/bmc-button.svg";
+
+const DeletePrompt = lazy(() => import("./DeletePrompt"));
+const ImportPrompt = lazy(() => import("./ImportPrompt"));
 
 const TaskManager = () => {
   const dispatch = useDispatch();
   const statuses = ["Backlog", "In Progress", "Done"];
-  const tasks = useSelector((state) => state.tasks.tasks);
+  const tasks = useSelector((state) => state.taskite.tasks);
 
   useEffect(() => {
     const handleResize = () => {
-      dispatch(updateWWidth(window.innerWidth));
+      dispatch(updateWidth(window.innerWidth));
     };
-
     window.addEventListener("resize", handleResize);
   }, [dispatch]);
 
   return (
     <>
-      <div className="py-14 px-5 overflow-y-auto lg:px-10 h-full w-full flex flex-col max-w-screen-xl mx-auto min-w-92.5 min-h-138">
-        <div className="relative inline-block mx-auto text-center text-5xl font-light mb-10 font-playwright">
+      <div className="py-14 px-5 overflow-y-auto lg:px-10 h-full w-full flex min-h-full flex-col max-w-screen-xl mx-auto min-w-92.5">
+        <div className="relative inline-block mx-auto text-center text-5xl font-light mb-5 font-playwright">
           <h1 className="text-indigo">taskite</h1>
           <span className="absolute -top-0.5 -left-0.5 text-yellow">
             taskite
           </span>
+        </div>
+        <div className="w-full mb-5 flex justify-end gap-5 flex-col sm:flex-row">
+          <ImportButton />
+          <ExportButton />
         </div>
         <DndProvider backend={HTML5Backend}>
           <div className="grid grid-cols-1 md:flex-1 md:grid-cols-3 gap-5 md:flex-grow md:overflow-hidden">
@@ -40,9 +47,9 @@ const TaskManager = () => {
             ))}
           </div>
         </DndProvider>
-        <div className="relative w-full mt-10 text-black/80 text-base flex flex-col gap-5 sm:flex-row justify-between items-center">
+        <div className="mt-auto relative w-full pt-5 text-black/80 text-base flex flex-col gap-5 sm:flex-row justify-between items-center">
           <p>
-            &copy; 2025&nbsp;
+            &copy; {new Date().getFullYear()}&nbsp;
             <a
               className="underline"
               href="https://takumayumi.pages.dev"
@@ -69,7 +76,10 @@ const TaskManager = () => {
           </a>
         </div>
       </div>
-      <DeletePrompt />
+      <Suspense fallback={null}>
+        <DeletePrompt />
+        <ImportPrompt />
+      </Suspense>
     </>
   );
 };

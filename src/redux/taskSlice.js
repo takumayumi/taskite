@@ -1,74 +1,110 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Load from localStorage with fallback
+const stored = JSON.parse(localStorage.getItem("taskite")) || {};
+
+// Initial state
 const initialState = {
-  showPrompt: false,
+  showPrompt: stored.showPrompt ?? null,
   task: null,
-  tasks: JSON.parse(localStorage.getItem("tasks")) || {},
-  wWidth: window.innerWidth,
+  tasks: stored.tasks || {},
+  width: window.innerWidth,
+};
+
+// Helper to persist to localStorage
+const saveToLocalStorage = (state) => {
+  localStorage.setItem(
+    "taskite",
+    JSON.stringify({
+      showPrompt: state.showPrompt,
+      tasks: state.tasks,
+    })
+  );
 };
 
 const taskSlice = createSlice({
-  name: "task",
+  name: "taskite",
   initialState,
   reducers: {
     addTask: (state, action) => {
       const status = action.payload;
-
       if (!state.tasks[status]) {
         state.tasks[status] = [];
       }
-
       state.tasks[status].push({
         id: Date.now().toString(),
         content: "New task",
         created: false,
         status,
       });
-
-      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+      saveToLocalStorage(state);
     },
+
     deleteTask: (state, action) => {
       const { id } = action.payload;
-
       for (const status in state.tasks) {
         state.tasks[status] = state.tasks[status].filter(
           (task) => task.id !== id
         );
       }
-
-      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+      saveToLocalStorage(state);
     },
+
+    exportTasks: (state) => {
+      return JSON.stringify({
+        showPrompt: state.showPrompt,
+        tasks: state.tasks,
+      });
+    },
+
+    importTasks: (state, action) => {
+      try {
+        const imported = JSON.parse(action.payload);
+        if (
+          typeof imported === "object" &&
+          imported !== null &&
+          typeof imported.tasks === "object"
+        ) {
+          state.tasks = imported.tasks;
+          state.showPrompt = imported.showPrompt ?? false;
+          saveToLocalStorage(state);
+        } else {
+          console.error("Invalid taskite structure.");
+        }
+      } catch (error) {
+        console.error("Failed to import taskite:", error);
+      }
+    },
+
     setShowPrompt: (state, action) => {
-      const show = action.payload;
-
-      state.showPrompt = show;
+      state.showPrompt = action.payload;
+      saveToLocalStorage(state);
     },
+
     toggleTask: (state, action) => {
       state.task = action.payload;
     },
+
     updateContent: (state, action) => {
       const { task, content } = action.payload;
       const { id, status } = task;
-
       state.tasks[status] = state.tasks[status].map((task) =>
         task.id === id ? { ...task, content } : task
       );
-
-      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+      saveToLocalStorage(state);
     },
+
     updateCreated: (state, action) => {
       const { id, status } = action.payload;
-
       state.tasks[status] = state.tasks[status].map((task) =>
         task.id === id ? { ...task, created: true } : task
       );
-
-      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+      saveToLocalStorage(state);
     },
+
     updateStatus: (state, action) => {
       const { task, newStatus } = action.payload;
       const { id } = task;
-
       const taskToUpdate = Object.values(state.tasks)
         .flat()
         .find((task) => task.id === id);
@@ -85,10 +121,11 @@ const taskSlice = createSlice({
       }
 
       state.tasks[newStatus].push(updatedTask);
-      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+      saveToLocalStorage(state);
     },
-    updateWWidth: (state, action) => {
-      state.wWidth = action.payload;
+
+    updateWidth: (state, action) => {
+      state.width = action.payload;
     },
   },
 });
@@ -96,11 +133,14 @@ const taskSlice = createSlice({
 export const {
   addTask,
   deleteTask,
+  exportTasks,
+  importTasks,
   setShowPrompt,
   toggleTask,
   updateContent,
   updateCreated,
   updateStatus,
-  updateWWidth,
+  updateWidth,
 } = taskSlice.actions;
+
 export default taskSlice.reducer;
