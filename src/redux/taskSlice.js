@@ -6,7 +6,6 @@ const stored = JSON.parse(localStorage.getItem("taskite")) || {};
 // Initial state
 const initialState = {
   showPrompt: stored.showPrompt ?? null,
-  task: null,
   tasks: stored.tasks || {},
   width: window.innerWidth,
 };
@@ -41,20 +40,12 @@ const taskSlice = createSlice({
     },
 
     deleteTask: (state, action) => {
-      const { id } = action.payload;
       for (const status in state.tasks) {
         state.tasks[status] = state.tasks[status].filter(
-          (task) => task.id !== id
+          (task) => task.id !== action.payload
         );
       }
       saveToLocalStorage(state);
-    },
-
-    exportTasks: (state) => {
-      return JSON.stringify({
-        showPrompt: state.showPrompt,
-        tasks: state.tasks,
-      });
     },
 
     importTasks: (state, action) => {
@@ -79,10 +70,6 @@ const taskSlice = createSlice({
     setShowPrompt: (state, action) => {
       state.showPrompt = action.payload;
       saveToLocalStorage(state);
-    },
-
-    toggleTask: (state, action) => {
-      state.task = action.payload;
     },
 
     updateContent: (state, action) => {
@@ -133,10 +120,8 @@ const taskSlice = createSlice({
 export const {
   addTask,
   deleteTask,
-  exportTasks,
   importTasks,
   setShowPrompt,
-  toggleTask,
   updateContent,
   updateCreated,
   updateStatus,

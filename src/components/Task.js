@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import {
+  deleteTask,
   setShowPrompt,
-  toggleTask,
   updateContent,
   updateCreated,
   updateStatus,
@@ -26,7 +26,7 @@ const Task = ({ task }) => {
   const textRef = useRef(null);
 
   const handleDelete = () => {
-    dispatch(toggleTask(task));
+    dispatch(deleteTask(task.id));
     dispatch(setShowPrompt("delete"));
   };
 

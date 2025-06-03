@@ -24,7 +24,7 @@
   }
 
   .btn-vintage {
-    @apply py-2 px-4 outline-none cursor-pointer relative bg-transparent touch-manipulation z-10 text-xs tracking-wide flex gap-2 items-center justify-center;
+    @apply py-2 px-4 outline-none cursor-pointer relative bg-transparent touch-manipulation z-0 text-xs tracking-wide flex gap-2 items-center justify-center;
   }
 
   .btn-vintage:before {
@@ -37,5 +37,41 @@
 
   .btn-vintage:hover:after {
     @apply top-0 left-0;
+  }
+
+  .popup-bg {
+    @apply fixed top-0 left-0 h-full w-full transition-opacity bg-black/80 duration-200 ease-linear;
+  }
+
+  .popup-bg.show {
+    @apply pointer-events-auto opacity-100;
+  }
+
+  .popup-bg.hide {
+    @apply pointer-events-none opacity-0;
+  }
+
+  .popup {
+    @apply fixed z-10 w-4/5 md:max-w-sm lg:max-w-md xl:max-w-lg bg-yellow-1 rounded-lg p-10 transition-transform duration-200 ease-linear top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 flex flex-col gap-10;
+  }
+
+  .popup.show {
+    @apply scale-100;
+  }
+
+  .popup.hide {
+    @apply scale-0;
+  }
+
+  .popup-buttons {
+    @apply flex items-center gap-3 justify-end;
+  }
+
+  .popup-button.confirm {
+    @apply btn-txt bg-green-2;
+  }
+
+  .popup-button.cancel {
+    @apply btn-txt bg-orange-2;
   }
 }

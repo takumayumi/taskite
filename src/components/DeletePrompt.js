@@ -1,45 +1,39 @@
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTask, setShowPrompt, toggleTask } from "../redux/taskSlice";
+import { setShowPrompt } from "../redux/taskSlice";
 import classNames from "classnames";
 
 const DeletePrompt = () => {
   const dispatch = useDispatch();
   const showPrompt = useSelector((state) => state.taskite.showPrompt);
-  const task = useSelector((state) => state.taskite.tasks);
 
   const handleConfirm = () => {
-    dispatch(deleteTask(task));
     dispatch(setShowPrompt(null));
-    dispatch(toggleTask(null));
   };
 
   const handleCancel = () => {
     dispatch(setShowPrompt(null));
-    dispatch(toggleTask(null));
   };
 
   return (
     <div
       className={classNames(
-        "fixed top-0 left-0 h-full w-full transition-opacity bg-black/80 duration-200 ease-linear",
-        showPrompt === "delete"
-          ? "pointer-events-auto opacity-100"
-          : "pointer-events-none opacity-0"
+        "popup-bg",
+        showPrompt === "delete" ? "show" : "hide"
       )}
       onClick={handleCancel}
     >
       <div
         className={classNames(
-          "fixed z-10 w-auto bg-yellow-1 rounded-lg p-10 transition-transform duration-200 ease-linear top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 flex flex-col gap-10",
-          showPrompt === "delete" ? "scale-100" : "scale-0"
+          "popup",
+          showPrompt === "delete" ? "show" : "hide"
         )}
       >
         <p>Are you sure you want to delete this task?</p>
-        <div className="flex items-center gap-3 justify-end">
-          <button className="btn-txt bg-green-2" onClick={handleConfirm}>
+        <div className="popup-buttons">
+          <button className="popup-button confirm" onClick={handleConfirm}>
             Yes
           </button>
-          <button className="btn-txt bg-orange-2" onClick={handleCancel}>
+          <button className="popup-button cancel" onClick={handleCancel}>
             No
           </button>
         </div>

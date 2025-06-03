@@ -13,7 +13,7 @@ const ImportButton = () => {
   return (
     <button className="btn-vintage" onClick={handleClick}>
       <FontAwesomeIcon icon={faFolderOpen} />
-      Import Backup
+      Restore from Backup
     </button>
   );
 };

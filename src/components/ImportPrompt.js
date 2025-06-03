@@ -55,17 +55,15 @@ const ImportPrompt = () => {
       {/* Prompt UI */}
       <div
         className={classNames(
-          "fixed top-0 left-0 h-full w-full transition-opacity bg-black/80 duration-200 ease-linear",
-          showPrompt === "import"
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0"
+          "popup-bg",
+          showPrompt === "import" ? "show" : "hide"
         )}
         onClick={handleCancel}
       >
         <div
           className={classNames(
-            "fixed z-10 w-auto bg-yellow-1 rounded-lg p-10 transition-transform duration-200 ease-linear top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 flex flex-col gap-10",
-            showPrompt === "import" ? "scale-100" : "scale-0"
+            "popup",
+            showPrompt === "import" ? "show" : "hide"
           )}
           onClick={(e) => e.stopPropagation()}
         >
@@ -82,11 +80,11 @@ const ImportPrompt = () => {
               undone. Are you sure you want to continue?
             </p>
           </div>
-          <div className="flex items-center gap-3 justify-end">
-            <button className="btn-txt bg-green-2" onClick={handleConfirm}>
+          <div className="popup-buttons">
+            <button className="popup-button confirm" onClick={handleConfirm}>
               Yes
             </button>
-            <button className="btn-txt bg-orange-2" onClick={handleCancel}>
+            <button className="popup-button cancel" onClick={handleCancel}>
               No
             </button>
           </div>

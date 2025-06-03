@@ -25,14 +25,14 @@ const TaskManager = () => {
 
   return (
     <>
-      <div className="py-14 px-5 overflow-y-auto lg:px-10 h-full w-full flex min-h-full flex-col max-w-screen-xl mx-auto min-w-92.5">
+      <div className="py-14 px-5 overflow-y-auto lg:px-10 h-full w-full flex min-h-full flex-col max-w-screen-xl mx-auto">
         <div className="relative inline-block mx-auto text-center text-5xl font-light mb-5 font-playwright">
           <h1 className="text-indigo">taskite</h1>
           <span className="absolute -top-0.5 -left-0.5 text-yellow">
             taskite
           </span>
         </div>
-        <div className="w-full mb-5 flex justify-end gap-5 flex-col sm:flex-row">
+        <div className="w-full mb-5 flex justify-end gap-5 flex-row">
           <ImportButton />
           <ExportButton />
         </div>
