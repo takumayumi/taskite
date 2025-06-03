@@ -2,11 +2,12 @@ import { lazy, Suspense, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { ToastContainer, Slide } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { updateWidth } from "../redux/taskSlice";
 import ExportButton from "./ExportButton";
 import ImportButton from "./ImportButton";
 import TaskList from "./TaskList";
-import { useDispatch, useSelector } from "react-redux";
-import { updateWidth } from "../redux/taskSlice";
+import XLSXButton from "./XLSXButton";
 import BMCIcon from "../assets/bmc-button.svg";
 
 const DeletePrompt = lazy(() => import("./DeletePrompt"));
@@ -47,10 +48,6 @@ const TaskManager = () => {
             taskite
           </span>
         </div>
-        <div className="w-full mb-5 flex justify-end gap-5 flex-row">
-          <ImportButton />
-          <ExportButton />
-        </div>
         <DndProvider backend={HTML5Backend}>
           <div className="grid grid-cols-1 md:flex-1 md:grid-cols-3 gap-5 md:flex-grow md:overflow-hidden">
             {statuses.map((status) => (
@@ -62,6 +59,11 @@ const TaskManager = () => {
             ))}
           </div>
         </DndProvider>
+        <div className="w-full mt-5 flex justify-center gap-3 sm:gap-5 flex-col sm:flex-row">
+          <ImportButton />
+          <XLSXButton />
+          <ExportButton />
+        </div>
         <div className="mt-auto relative w-full pt-5 text-black/80 text-base flex flex-col gap-5 sm:flex-row justify-between items-center">
           <p>
             &copy; {new Date().getFullYear()}&nbsp;

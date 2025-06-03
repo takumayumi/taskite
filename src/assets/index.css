@@ -24,7 +24,7 @@
   }
 
   .btn-vintage {
-    @apply py-2 px-4 outline-none cursor-pointer relative bg-transparent touch-manipulation z-0 text-xs tracking-wide flex gap-2 items-center justify-center;
+    @apply py-2 px-4 outline-none cursor-pointer relative bg-transparent touch-manipulation z-0 text-xs lg:text-sm tracking-wide flex gap-2 items-center justify-center;
   }
 
   .btn-vintage:before {
@@ -32,11 +32,11 @@
   }
 
   .btn-vintage:after {
-    @apply content-[''] bg-yellow-1 w-full -z-10 absolute h-full top-1 left-1 transition-all duration-100 ease-in;
+    @apply content-[''] bg-yellow-1/80 w-full -z-10 absolute h-full top-1 left-1 transition-all duration-100 ease-in;
   }
 
   .btn-vintage:hover:after {
-    @apply top-0 left-0;
+    @apply top-0 left-0 bg-yellow-1;
   }
 
   .popup-bg {
