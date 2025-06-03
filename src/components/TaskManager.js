@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { ToastContainer, Slide } from "react-toastify";
 import ExportButton from "./ExportButton";
 import ImportButton from "./ImportButton";
 import TaskList from "./TaskList";
@@ -25,6 +26,20 @@ const TaskManager = () => {
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={10000}
+        closeButton={false}
+        closeOnClick
+        draggable={false}
+        hideProgressBar
+        icon={false}
+        newestOnTop={false}
+        pauseOnFocusLoss
+        pauseOnHover
+        rtl={false}
+        transition={Slide}
+      />
       <div className="py-14 px-5 overflow-y-auto lg:px-10 h-full w-full flex min-h-full flex-col max-w-screen-xl mx-auto">
         <div className="relative inline-block mx-auto text-center text-5xl font-light mb-5 font-playwright">
           <h1 className="text-indigo">taskite</h1>

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 // Load from localStorage with fallback
 const stored = JSON.parse(localStorage.getItem("taskite")) || {};
@@ -11,11 +12,10 @@ const initialState = {
 };
 
 // Helper to persist to localStorage
-const saveToLocalStorage = (state) => {
+const updateLocalStorage = (state) => {
   localStorage.setItem(
     "taskite",
     JSON.stringify({
-      showPrompt: state.showPrompt,
       tasks: state.tasks,
     })
   );
@@ -36,7 +36,7 @@ const taskSlice = createSlice({
         created: false,
         status,
       });
-      saveToLocalStorage(state);
+      updateLocalStorage(state);
     },
 
     deleteTask: (state, action) => {
@@ -45,7 +45,7 @@ const taskSlice = createSlice({
           (task) => task.id !== action.payload
         );
       }
-      saveToLocalStorage(state);
+      updateLocalStorage(state);
     },
 
     importTasks: (state, action) => {
@@ -57,19 +57,25 @@ const taskSlice = createSlice({
           typeof imported.tasks === "object"
         ) {
           state.tasks = imported.tasks;
-          state.showPrompt = imported.showPrompt ?? false;
-          saveToLocalStorage(state);
+          updateLocalStorage(state);
+          toast.success("Import successful!", {
+            className: "success-bg",
+          });
         } else {
-          console.error("Invalid taskite structure.");
+          toast.error("Invalid taskite structure.", {
+            className: "error-bg",
+          });
         }
       } catch (error) {
-        console.error("Failed to import taskite:", error);
+        toast.error(`Failed to import taskite: ${error.message}`, {
+          className: "error-bg",
+        });
       }
     },
 
     setShowPrompt: (state, action) => {
       state.showPrompt = action.payload;
-      saveToLocalStorage(state);
+      updateLocalStorage(state);
     },
 
     updateContent: (state, action) => {
@@ -78,7 +84,7 @@ const taskSlice = createSlice({
       state.tasks[status] = state.tasks[status].map((task) =>
         task.id === id ? { ...task, content } : task
       );
-      saveToLocalStorage(state);
+      updateLocalStorage(state);
     },
 
     updateCreated: (state, action) => {
@@ -86,7 +92,7 @@ const taskSlice = createSlice({
       state.tasks[status] = state.tasks[status].map((task) =>
         task.id === id ? { ...task, created: true } : task
       );
-      saveToLocalStorage(state);
+      updateLocalStorage(state);
     },
 
     updateStatus: (state, action) => {
@@ -108,7 +114,7 @@ const taskSlice = createSlice({
       }
 
       state.tasks[newStatus].push(updatedTask);
-      saveToLocalStorage(state);
+      updateLocalStorage(state);
     },
 
     updateWidth: (state, action) => {

@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 
 const ExportButton = () => {
-  const tasks = useSelector((state) => state.taskite.tasks);
+  const taskite = useSelector((state) => state.taskite);
 
   const handleExport = () => {
-    const exportedData = JSON.stringify(tasks, null, 2);
+    const exportedData = JSON.stringify(taskite, null, 2);
     const blob = new Blob([exportedData], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");

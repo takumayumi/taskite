@@ -75,3 +75,13 @@
     @apply btn-txt bg-orange-2;
   }
 }
+
+@layer utilities {
+  .error-bg {
+    @apply rounded-none w-full text-xs min-h-0 [&]:py-3 h-auto px-5 bg-orange-2 text-white;
+  }
+
+  .success-bg {
+    @apply rounded-none w-full text-xs min-h-0 [&]:py-3 h-auto px-5 bg-green-2 text-white;
+  }
+}
