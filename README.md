@@ -9,6 +9,9 @@ taskite is a simple task management application built with Create React App, Tai
 - **Change Task Status**: Update task status either manually using a dropdown or by dragging and dropping tasks between lists.
 - **Delete Tasks**: Remove tasks from the lists.
 - **Data Persistence**: All tasks are saved in local storage to ensure data is retained even after refreshing the page.
+- **Save as Backup**: Exports the current board state as a .json backup file.
+- **Export to Excel**: Enables exporting the board to an .xlsx file using the SheetJS (XLSX) package.
+- **Restore from Backup**: Allows importing backup .json files to load board data.
 
 ## Technologies Used
 
@@ -17,7 +20,9 @@ taskite is a simple task management application built with Create React App, Tai
 - **React**: For building the user interface.
 - **React DnD**: For implementing drag-and-drop functionality.
 - **Redux**: For state management.
+- **SheetJS (XLSX)**: For handling Excel file generation.
 - **Tailwind CSS**: For styling the application.
+- **Toastify**: To display status notifications.
 
 ## Getting Started
 
