@@ -26,8 +26,7 @@ module.exports = {
         playwright: ["Playwrite NO", "cursive"],
       },
       spacing: {
-        92.5: "370px",
-        138: "552px",
+        6.5: "26px",
       },
     },
   },

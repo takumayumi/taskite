@@ -5,10 +5,12 @@ import { ToastContainer, Slide } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { updateWidth } from "../redux/taskSlice";
 import ExportButton from "./ExportButton";
+import Footer from "./Footer";
 import ImportButton from "./ImportButton";
+import InfoModal from "./InfoModal";
 import TaskList from "./TaskList";
+import Title from "./Title";
 import XLSXButton from "./XLSXButton";
-import BMCIcon from "../assets/bmc-button.svg";
 
 const DeletePrompt = lazy(() => import("./DeletePrompt"));
 const ImportPrompt = lazy(() => import("./ImportPrompt"));
@@ -41,13 +43,8 @@ const TaskManager = () => {
         rtl={false}
         transition={Slide}
       />
-      <div className="py-14 px-5 overflow-y-auto lg:px-10 h-full w-full flex min-h-full flex-col max-w-screen-xl mx-auto">
-        <div className="relative inline-block mx-auto text-center text-5xl font-light mb-5 font-playwright">
-          <h1 className="text-indigo">taskite</h1>
-          <span className="absolute -top-0.5 -left-0.5 text-yellow">
-            taskite
-          </span>
-        </div>
+      <div className="py-10 px-5 overflow-y-auto h-full w-full flex min-h-full flex-col max-w-screen-xl mx-auto">
+        <Title />
         <DndProvider backend={HTML5Backend}>
           <div className="grid grid-cols-1 md:flex-1 md:grid-cols-3 gap-5 md:flex-grow md:overflow-hidden">
             {statuses.map((status) => (
@@ -64,38 +61,12 @@ const TaskManager = () => {
           <XLSXButton />
           <ExportButton />
         </div>
-        <div className="mt-auto relative w-full pt-5 text-black/80 text-base flex flex-col gap-5 sm:flex-row justify-between items-center">
-          <p>
-            &copy; {new Date().getFullYear()}&nbsp;
-            <a
-              className="underline"
-              href="https://takumayumi.pages.dev"
-              title="takumayumi"
-              target="_blank"
-              rel="noreferrer"
-            >
-              takumayumi
-            </a>
-          </p>
-          <a
-            href="https://buymeacoffee.com/yumicchi"
-            title="Buy me a hot chocolate"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Buy me a hot chocolate"
-          >
-            <img
-              src={BMCIcon}
-              alt="Buy me a hot chocolate"
-              width="179"
-              height="50"
-            />
-          </a>
-        </div>
+        <Footer />
       </div>
       <Suspense fallback={null}>
         <DeletePrompt />
         <ImportPrompt />
+        <InfoModal />
       </Suspense>
     </>
   );

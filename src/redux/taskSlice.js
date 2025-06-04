@@ -33,7 +33,7 @@ const taskSlice = createSlice({
       state.tasks[status].push({
         id: Date.now().toString(),
         content: "New task",
-        created: false,
+        created: new Date().toString(),
         status,
       });
       updateLocalStorage(state);
@@ -90,7 +90,7 @@ const taskSlice = createSlice({
     updateCreated: (state, action) => {
       const { id, status } = action.payload;
       state.tasks[status] = state.tasks[status].map((task) =>
-        task.id === id ? { ...task, created: true } : task
+        task.id === id ? { ...task, updated: new Date().toString() } : task
       );
       updateLocalStorage(state);
     },

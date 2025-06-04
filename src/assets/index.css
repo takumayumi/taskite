@@ -12,7 +12,7 @@
 
 @layer components {
   .btn-icon {
-    @apply text-orange-2 flex items-center justify-between gap-4 w-full text-left;
+    @apply text-orange-2 flex items-center justify-between gap-4 w-full text-left pl-1;
   }
 
   .btn-icon svg {
@@ -20,7 +20,7 @@
   }
 
   .btn-txt {
-    @apply py-2 px-4 rounded-md text-white;
+    @apply py-2 px-4 rounded-md text-white text-sm;
   }
 
   .btn-vintage {

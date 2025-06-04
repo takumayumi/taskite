@@ -102,6 +102,17 @@ const Task = ({ task }) => {
     window.addEventListener("resize", handleResize);
   }, [task]);
 
+  const dateParts = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date(task.updated || task.created));
+  const getDate = (type) => dateParts.find((p) => p.type === type)?.value;
+  const formattedDate = `${getDate("month")} ${getDate("day")} ${getDate("year")} ${getDate("hour")}:${getDate("minute")}`;
+
   return (
     <div
       className={`bg-white rounded-md w-full relative p-4 ${
@@ -129,20 +140,25 @@ const Task = ({ task }) => {
           title="Task"
           type="text"
         />
-        <button
-          className={classNames(
-            "inline-flex w-auto leading-3 justify-end hover:text-orange-2 duration-200 ease-linear",
-            showMenu ? "text-orange-2" : "text-orange"
-          )}
-          onClick={() => setShowMenu(!showMenu)}
-          type="button"
-        >
-          •••
-        </button>
+        <div className="w-full flex gap-2 items-center justify-between">
+          <span className="text-xs text-blue/50 leading-none truncate">
+            {task.updated ? "Updated" : "Created"} {formattedDate}
+          </span>
+          <button
+            className={classNames(
+              "inline-flex w-auto leading-3 justify-end hover:text-orange-2 duration-200 ease-linear",
+              showMenu ? "text-orange-2" : "text-orange"
+            )}
+            onClick={() => setShowMenu(!showMenu)}
+            type="button"
+          >
+            •••
+          </button>
+        </div>
       </div>
       <div
         className={classNames(
-          "mt-4 flex-col gap-4 text-sm lg:text-base items-start",
+          "mt-4 flex-col gap-4 pr-1 text-sm lg:text-base items-start",
           showMenu ? "flex" : "hidden"
         )}
       >

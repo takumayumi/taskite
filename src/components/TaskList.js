@@ -19,7 +19,7 @@ const TaskList = ({ status, tasks }) => {
   return (
     <div
       className={classNames(
-        "col-span-1 flex flex-col w-full gap-4 relative md:h-full rounded-xl overflow-hidden bg-green transition-colors duration-200 ease-linear p-6",
+        "col-span-1 flex flex-col w-full gap-4 relative md:h-full rounded-xl overflow-hidden bg-green transition-colors duration-200 ease-linear p-6 pl-6.5",
         isOver ? "bg-green-2" : ""
       )}
     >
@@ -34,7 +34,7 @@ const TaskList = ({ status, tasks }) => {
           {status}
         </h2>
         <button
-          className="md:ml-auto text-white-1"
+          className="ml-auto text-white-1"
           onClick={() => dispatch(addTask(status))}
           title={`Add ${status} Task`}
           type="button"
