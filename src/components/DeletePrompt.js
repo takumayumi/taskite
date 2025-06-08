@@ -1,16 +1,20 @@
 import { useSelector, useDispatch } from "react-redux";
-import { setShowPrompt } from "../redux/taskSlice";
+import { deleteTask, setSelectedTask, setShowPrompt } from "../redux/taskSlice";
 import classNames from "classnames";
 
 const DeletePrompt = () => {
   const dispatch = useDispatch();
+  const selectedTask = useSelector((state) => state.taskite.selectedTask);
   const showPrompt = useSelector((state) => state.taskite.showPrompt);
 
   const handleConfirm = () => {
+    dispatch(deleteTask(selectedTask));
+    dispatch(setSelectedTask(null));
     dispatch(setShowPrompt(null));
   };
 
   const handleCancel = () => {
+    dispatch(setSelectedTask(null));
     dispatch(setShowPrompt(null));
   };
 

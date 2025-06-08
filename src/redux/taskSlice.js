@@ -6,6 +6,7 @@ const stored = JSON.parse(localStorage.getItem("taskite")) || {};
 
 // Initial state
 const initialState = {
+  selectedTask: null,
   showPrompt: stored.showPrompt ?? null,
   tasks: stored.tasks || {},
   width: window.innerWidth,
@@ -42,7 +43,7 @@ const taskSlice = createSlice({
     deleteTask: (state, action) => {
       for (const status in state.tasks) {
         state.tasks[status] = state.tasks[status].filter(
-          (task) => task.id !== action.payload
+          (task) => task.id !== state.selectedTask.id
         );
       }
       updateLocalStorage(state);
@@ -73,6 +74,10 @@ const taskSlice = createSlice({
       }
     },
 
+    setSelectedTask: (state, action) => {
+      state.selectedTask = action.payload;
+    },
+
     setShowPrompt: (state, action) => {
       state.showPrompt = action.payload;
       updateLocalStorage(state);
@@ -81,16 +86,25 @@ const taskSlice = createSlice({
     updateContent: (state, action) => {
       const { task, content } = action.payload;
       const { id, status } = task;
-      state.tasks[status] = state.tasks[status].map((task) =>
-        task.id === id ? { ...task, content } : task
-      );
+      state.tasks[status] = state.tasks[status].map((task) => {
+        if (task.id === id) {
+          if (task.content !== content) {
+            return {
+              ...task,
+              content,
+              updated: new Date().toString(),
+            };
+          }
+        }
+        return task;
+      });
       updateLocalStorage(state);
     },
 
     updateCreated: (state, action) => {
       const { id, status } = action.payload;
       state.tasks[status] = state.tasks[status].map((task) =>
-        task.id === id ? { ...task, updated: new Date().toString() } : task
+        task.id === id ? { ...task, created: new Date().toString() } : task
       );
       updateLocalStorage(state);
     },
@@ -127,6 +141,7 @@ export const {
   addTask,
   deleteTask,
   importTasks,
+  setSelectedTask,
   setShowPrompt,
   updateContent,
   updateCreated,

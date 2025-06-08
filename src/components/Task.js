@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import {
-  deleteTask,
+  setSelectedTask,
   setShowPrompt,
   updateContent,
   updateCreated,
@@ -26,7 +26,7 @@ const Task = ({ task }) => {
   const textRef = useRef(null);
 
   const handleDelete = () => {
-    dispatch(deleteTask(task.id));
+    dispatch(setSelectedTask(task));
     dispatch(setShowPrompt("delete"));
   };
 
@@ -128,7 +128,7 @@ const Task = ({ task }) => {
           {task.content}
         </span>
         <textarea
-          className="overflow-y-hidden bg-transparent w-full resize-none outline-none focus:outline-none"
+          className="overflow-y-hidden rounded-md bg-black/5 disabled:user-select-none disabled:bg-transparent w-full resize-none outline-none focus:outline-none"
           defaultValue={task.created ? task.content : ""}
           disabled={task.created}
           name={task.id}
@@ -137,7 +137,7 @@ const Task = ({ task }) => {
           onKeyDown={(e) => handleTextChange(e)}
           placeholder="New task"
           ref={inputRef}
-          title="Task"
+          title={task.content}
           type="text"
         />
         <div className="w-full flex gap-2 items-center justify-between">
