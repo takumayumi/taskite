@@ -128,7 +128,7 @@ const Task = ({ task }) => {
           {task.content}
         </span>
         <textarea
-          className="overflow-y-hidden rounded-md bg-black/5 disabled:user-select-none disabled:bg-transparent w-full resize-none outline-none focus:outline-none"
+          className="overflow-y-hidden rounded-md bg-black/5 disabled:pointer-events-none disabled:bg-transparent w-full resize-none outline-none focus:outline-none"
           defaultValue={task.created ? task.content : ""}
           disabled={task.created}
           name={task.id}
