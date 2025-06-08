@@ -34,10 +34,10 @@ const DeletePrompt = () => {
       >
         <p>Are you sure you want to delete this task?</p>
         <div className="popup-buttons">
-          <button className="popup-button confirm" onClick={handleConfirm}>
+          <button className="btn-txt confirm" onClick={handleConfirm}>
             Yes
           </button>
-          <button className="popup-button cancel" onClick={handleCancel}>
+          <button className="btn-txt cancel" onClick={handleCancel}>
             No
           </button>
         </div>

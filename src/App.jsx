@@ -3,19 +3,19 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { ToastContainer, Slide } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { updateWidth } from "../redux/taskSlice";
-import ExportButton from "./ExportButton";
-import Footer from "./Footer";
-import ImportButton from "./ImportButton";
-import InfoModal from "./InfoModal";
-import TaskList from "./TaskList";
-import Title from "./Title";
-import XLSXButton from "./XLSXButton";
+import { updateWidth } from "./redux/taskSlice";
+import ExportButton from "./components/ExportButton";
+import Footer from "./components/Footer";
+import ImportButton from "./components/ImportButton";
+import TaskList from "./components/TaskList";
+import Title from "./components/Title";
+import XLSXButton from "./components/XLSXButton";
 
-const DeletePrompt = lazy(() => import("./DeletePrompt"));
-const ImportPrompt = lazy(() => import("./ImportPrompt"));
+const DeletePrompt = lazy(() => import("./components/DeletePrompt"));
+const ImportPrompt = lazy(() => import("./components/ImportPrompt"));
+const InfoModal = lazy(() => import("./components/InfoModal"));
 
-const TaskManager = () => {
+const App = () => {
   const dispatch = useDispatch();
   const statuses = ["Backlog", "In Progress", "Done"];
   const tasks = useSelector((state) => state.taskite.tasks);
@@ -72,4 +72,4 @@ const TaskManager = () => {
   );
 };
 
-export default TaskManager;
+export default App;

@@ -19,7 +19,7 @@ const TaskList = ({ status, tasks }) => {
   return (
     <div
       className={classNames(
-        "col-span-1 flex flex-col w-full gap-4 relative md:h-full rounded-xl overflow-hidden bg-green transition-colors duration-200 ease-linear p-6 pl-6.5",
+        "col-span-1 flex flex-col w-full gap-4 relative md:h-full rounded-xl overflow-hidden bg-green transition-colors duration-200 ease-linear p-6",
         isOver ? "bg-green-2" : ""
       )}
     >

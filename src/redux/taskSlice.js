@@ -40,7 +40,7 @@ const taskSlice = createSlice({
       updateLocalStorage(state);
     },
 
-    deleteTask: (state, action) => {
+    deleteTask: (state) => {
       for (const status in state.tasks) {
         state.tasks[status] = state.tasks[status].filter(
           (task) => task.id !== state.selectedTask.id

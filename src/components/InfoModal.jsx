@@ -46,7 +46,7 @@ const InfoModal = () => {
           </p>
         </div>
         <div className="popup-buttons">
-          <button className="popup-button confirm" onClick={handleCancel}>
+          <button className="btn-txt confirm" onClick={handleCancel}>
             OK
           </button>
         </div>
