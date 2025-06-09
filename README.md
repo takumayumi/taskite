@@ -30,7 +30,7 @@ taskite is ideal for individuals or small teams seeking a minimalist alternative
 - **React DnD**: For implementing drag-and-drop functionality.
 - **Redux**: For state management.
 - **SheetJS (XLSX)**: For handling Excel file generation.
-- **Tailwind CSS**: For styling the application.
+- **Tailwind CSS v4.0**: For styling the application.
 - **Toastify**: To display status notifications.
 
 ## Getting Started
