@@ -9,7 +9,7 @@ taskite is ideal for individuals or small teams seeking a minimalist alternative
 ## What's New
 
 - Migrated from **Create React App (CRA)** to **Vite + JS-SWC** for faster builds and better development experience.
-- Upgraded from **Tailwind CSS v3** to **Tailwind CSS v4** for access to the latest utility features and performance improvements.
+- Upgraded from **Tailwind CSS v3.0** to **Tailwind CSS v4.0** for access to the latest utility features and performance improvements.
 
 ## Features
 
