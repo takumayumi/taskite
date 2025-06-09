@@ -31,7 +31,7 @@ const App = () => {
     <>
       <ToastContainer
         position="top-center"
-        autoClose={10000}
+        autoClose={5000}
         closeButton={false}
         closeOnClick
         draggable={false}
