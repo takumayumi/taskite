@@ -14,7 +14,7 @@ const InfoModal = () => {
     <div
       className={classNames(
         "popup-bg",
-        showPrompt === "info" ? "show" : "hide"
+        showPrompt === "info" ? "show" : "hide",
       )}
       onClick={handleCancel}
     >
@@ -22,11 +22,11 @@ const InfoModal = () => {
         className={classNames("popup", showPrompt === "info" ? "show" : "hide")}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="w-full block">
+        <div className="block w-full">
           <p className="mb-3">
             <strong>What you can do with taskite?</strong>
           </p>
-          <ul className="list-disc pl-5 mb-3">
+          <ul className="mb-3 list-disc pl-5">
             <li>No sign-up required.</li>
             <li>
               Your tasks are stored privately in your browser using local

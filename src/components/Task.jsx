@@ -115,20 +115,20 @@ const Task = ({ task }) => {
 
   return (
     <div
-      className={`bg-white rounded-md w-full relative p-4 ${
+      className={`relative w-full rounded-md bg-white p-4 ${
         isDragging ? "cursor-grabbing" : "cursor-grab"
       }`}
       ref={drag}
     >
-      <div className="flex relative flex-col gap-4">
+      <div className="relative flex flex-col gap-4">
         <span
-          className="absolute top-0 w-full -z-10 invisible left-0 min-h-8 break-words"
+          className="invisible absolute top-0 left-0 -z-10 min-h-8 w-full break-words"
           ref={textRef}
         >
           {task.content}
         </span>
         <textarea
-          className="overflow-y-hidden rounded-md bg-black/5 disabled:pointer-events-none disabled:bg-transparent w-full resize-none outline-none focus:outline-none"
+          className="w-full resize-none overflow-y-hidden rounded-md bg-black/5 outline-none focus:outline-none disabled:pointer-events-none disabled:bg-transparent"
           defaultValue={task.created ? task.content : ""}
           disabled={task.created}
           name={task.id}
@@ -140,14 +140,14 @@ const Task = ({ task }) => {
           title={task.content}
           type="text"
         />
-        <div className="w-full flex gap-2 items-center justify-between">
-          <span className="text-xs text-blue/50 leading-none truncate">
+        <div className="flex w-full items-center justify-between gap-2">
+          <span className="text-blue/50 truncate text-xs leading-none">
             {task.updated ? "Updated" : "Created"} {formattedDate}
           </span>
           <button
             className={classNames(
-              "inline-flex w-auto leading-3 justify-end hover:text-orange-2 duration-200 ease-linear",
-              showMenu ? "text-orange-2" : "text-orange"
+              "hover:text-orange-2 inline-flex w-auto justify-end leading-3 duration-200 ease-linear",
+              showMenu ? "text-orange-2" : "text-orange",
             )}
             onClick={() => setShowMenu(!showMenu)}
             type="button"
@@ -158,12 +158,12 @@ const Task = ({ task }) => {
       </div>
       <div
         className={classNames(
-          "mt-4 flex-col gap-4 pr-1 text-sm lg:text-base items-start",
-          showMenu ? "flex" : "hidden"
+          "mt-4 flex-col items-start gap-4 pr-1 text-sm lg:text-base",
+          showMenu ? "flex" : "hidden",
         )}
       >
         <select
-          className="flex-grow w-full text-orange-2 bg-transparent rounded-md outline-none focus:outline-none"
+          className="text-orange-2 w-full flex-grow rounded-md bg-transparent outline-none focus:outline-none"
           value={task.status}
           onChange={handleDropdown}
           title="Change Status"

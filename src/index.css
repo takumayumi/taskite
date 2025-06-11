@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --color-black: oklch(24.78% 0.000 0);
+  --color-black: oklch(24.78% 0 0);
   --color-blue: oklch(67.71% 0.067 246.09);
   --color-green: oklch(76.25% 0.062 187.99);
   --color-green-1: oklch(83.39% 0.047 189.57);
   --color-green-2: oklch(53.35% 0.064 187.06);
   --color-indigo: oklch(25.73% 0.115 276.54);
-  --color-indigo-1: oklch(65.16% 0.131 284.20);
+  --color-indigo-1: oklch(65.16% 0.131 284.2);
   --color-indigo-2: oklch(17.25% 0.088 274.34);
-  --color-orange: oklch(72.39% 0.101 50.90);
+  --color-orange: oklch(72.39% 0.101 50.9);
   --color-orange-1: oklch(79.06% 0.047 51.69);
   --color-orange-2: oklch(65.81% 0.152 47.86);
-  --color-white: oklch(96.12% 0.000 0);
+  --color-white: oklch(96.12% 0 0);
   --color-yellow: oklch(82.97% 0.105 71.55);
-  --color-yellow-1: oklch(89.17% 0.060 73.47);
-  --color-yellow-2: oklch(77.90% 0.150 67.11);
+  --color-yellow-1: oklch(89.17% 0.06 73.47);
+  --color-yellow-2: oklch(77.9% 0.15 67.11);
 
   --font-poppins: "Poppins", sans-serif;
   --font-playwright: "Playwrite NO", cursive;
@@ -29,7 +29,7 @@
 
 @layer components {
   .btn-icon {
-    @apply text-orange-2 flex items-center justify-between gap-4 w-full text-left pl-1;
+    @apply text-orange-2 flex w-full items-center justify-between gap-4 pl-1 text-left;
   }
 
   .btn-icon svg {
@@ -37,7 +37,7 @@
   }
 
   .btn-txt {
-    @apply py-2 px-4 rounded-md text-white text-sm transition-all ease-in duration-200;
+    @apply rounded-md px-4 py-2 text-sm text-white transition-all duration-200 ease-in;
   }
 
   .btn-txt.confirm {
@@ -49,30 +49,30 @@
   }
 
   .btn-vintage {
-    @apply py-2 px-4 outline-none cursor-pointer relative bg-transparent touch-manipulation z-0 text-xs lg:text-sm tracking-wide flex gap-2 items-center justify-center;
+    @apply relative z-0 flex cursor-pointer touch-manipulation items-center justify-center gap-2 bg-transparent px-4 py-2 text-xs tracking-wide outline-none lg:text-sm;
   }
 
   .btn-vintage:before {
-    @apply z-0 absolute content-[''] w-full h-full top-0 left-0 border-solid border-black border-2;
+    @apply absolute top-0 left-0 z-0 h-full w-full border-2 border-solid border-black content-[''];
   }
 
   .btn-vintage:after {
-    @apply content-[''] bg-yellow-1/80 w-full -z-10 absolute h-full top-1 left-1 transition-all duration-100 ease-in;
+    @apply bg-yellow-1/80 absolute top-1 left-1 -z-10 h-full w-full transition-all duration-100 ease-in content-[''];
   }
 
   .btn-vintage:hover:after {
-    @apply top-0 left-0 bg-yellow-1;
+    @apply bg-yellow-1 top-0 left-0;
   }
 }
 
 html,
 body,
 #root {
-  @apply bg-blue text-indigo-2 w-full h-full m-0 p-0 font-poppins font-light text-base lg:text-lg;
+  @apply bg-blue text-indigo-2 font-poppins m-0 h-full w-full p-0 text-base font-light lg:text-lg;
 }
 
 .popup-bg {
-  @apply fixed top-0 left-0 h-full w-full transition-opacity bg-black/80 duration-200 ease-linear;
+  @apply fixed top-0 left-0 h-full w-full bg-black/80 transition-opacity duration-200 ease-linear;
 }
 
 .popup-bg.show {
@@ -84,7 +84,7 @@ body,
 }
 
 .popup {
-  @apply fixed z-10 w-4/5 md:max-w-sm lg:max-w-md xl:max-w-lg bg-yellow-1 rounded-lg p-10 transition-transform duration-200 ease-linear top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 flex flex-col gap-10;
+  @apply bg-yellow-1 fixed top-1/2 left-1/2 z-10 flex w-4/5 -translate-x-1/2 -translate-y-1/2 flex-col gap-10 rounded-lg p-10 transition-transform duration-200 ease-linear md:max-w-sm lg:max-w-md xl:max-w-lg;
 }
 
 .popup.show {
@@ -96,13 +96,13 @@ body,
 }
 
 .popup-buttons {
-  @apply flex items-center gap-3 justify-end;
+  @apply flex items-center justify-end gap-3;
 }
 
 .error-bg {
-  @apply rounded-none w-full text-xs min-h-0 [&]:py-3 h-auto px-5 bg-orange-2 text-white;
+  @apply bg-orange-2 h-auto min-h-0 w-full rounded-none px-5 text-xs text-white [&]:py-3;
 }
 
 .success-bg {
-  @apply rounded-none w-full text-xs min-h-0 [&]:py-3 h-auto px-5 bg-green-2 text-white;
+  @apply bg-green-2 h-auto min-h-0 w-full rounded-none px-5 text-xs text-white [&]:py-3;
 }

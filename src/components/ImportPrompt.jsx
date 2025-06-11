@@ -11,7 +11,7 @@ const ImportPrompt = () => {
   const currentTasks = useSelector((state) => state.taskite.tasks);
   const currentTasksLength = Object.values(currentTasks).reduce(
     (sum, taskArr) => sum + taskArr.length,
-    0
+    0,
   );
   const fileInputRef = useRef(null);
 
@@ -56,18 +56,18 @@ const ImportPrompt = () => {
       <div
         className={classNames(
           "popup-bg",
-          showPrompt === "import" ? "show" : "hide"
+          showPrompt === "import" ? "show" : "hide",
         )}
         onClick={handleCancel}
       >
         <div
           className={classNames(
             "popup",
-            showPrompt === "import" ? "show" : "hide"
+            showPrompt === "import" ? "show" : "hide",
           )}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="w-full block">
+          <div className="block w-full">
             <p className="mb-3">
               <FontAwesomeIcon
                 className="text-orange-2 mr-2"

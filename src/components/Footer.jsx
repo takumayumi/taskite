@@ -2,8 +2,8 @@ import BMCIcon from "../assets/bmc-button.svg";
 
 const Footer = () => {
   return (
-    <div className="mt-auto relative w-full pt-5 text-black/80 text-base flex flex-col gap-5 sm:flex-row justify-between items-center">
-      <p>
+    <div className="relative mt-auto flex w-full flex-col items-center justify-between gap-5 pt-5 text-base text-black/80 sm:flex-row">
+      <p className="text-xs sm:text-sm lg:text-base">
         &copy; {new Date().getFullYear()}&nbsp;
         <a
           className="underline"
@@ -27,6 +27,7 @@ const Footer = () => {
           alt="Buy me a hot chocolate"
           width="179"
           height="50"
+          className="h-auto max-w-28 sm:max-w-32 lg:max-w-44"
         />
       </a>
     </div>

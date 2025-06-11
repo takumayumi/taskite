@@ -11,7 +11,7 @@ const XLSXButton = () => {
     // Define column order
     const statusOrder = ["Backlog", "In Progress", "Done"];
     const maxLength = Math.max(
-      ...statusOrder.map((key) => taskite.tasks[key]?.length || 0)
+      ...statusOrder.map((key) => taskite.tasks[key]?.length || 0),
     );
 
     // Header row

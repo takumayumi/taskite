@@ -22,14 +22,14 @@ const DeletePrompt = () => {
     <div
       className={classNames(
         "popup-bg",
-        showPrompt === "delete" ? "show" : "hide"
+        showPrompt === "delete" ? "show" : "hide",
       )}
       onClick={handleCancel}
     >
       <div
         className={classNames(
           "popup",
-          showPrompt === "delete" ? "show" : "hide"
+          showPrompt === "delete" ? "show" : "hide",
         )}
       >
         <p>Are you sure you want to delete this task?</p>
