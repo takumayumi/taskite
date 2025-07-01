@@ -9,7 +9,7 @@ taskite is ideal for individuals or small teams seeking a minimalist alternative
 ## What's New
 
 - Migrated from **Create React App (CRA)** to **Vite + JS-SWC** for faster builds and better development experience.
-- Upgraded from **Tailwind CSS v3.0** to **Tailwind CSS v4.0** for access to the latest utility features and performance improvements.
+- Upgraded from **Tailwind CSS 3** to **Tailwind CSS 4** for access to the latest utility features and performance improvements.
 
 ## Features
 
@@ -30,5 +30,5 @@ taskite is ideal for individuals or small teams seeking a minimalist alternative
 - **React DnD**: For implementing drag-and-drop functionality.
 - **Redux**: For state management.
 - **SheetJS (XLSX)**: For handling Excel file generation.
-- **Tailwind CSS v4.0**: For styling the application.
+- **Tailwind CSS 4**: For styling the application.
 - **Toastify**: To display status notifications.
