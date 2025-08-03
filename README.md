@@ -1,10 +1,8 @@
 # taskite
 
-taskite is a simple and efficient task management web application built with Vite, Tailwind CSS, and Redux. It helps users organize their work using an interactive board with three task stages: Backlog, In Progress, and Done.
+**taskite** is a lightweight, local-first task management web app designed for simplicity and productivity. It uses a kanban-style interface with three stages — **Backlog**, **In Progress**, and **Done** — and supports features like drag-and-drop, persistent local storage, file backup/export/import, and Progressive Web App (PWA) capabilities.
 
-taskite addresses the need for simple yet effective task tracking, providing a user-friendly interface, essential productivity features, and local data persistence. Users can save their tasks as a .json backup file, load previous backups, or export their tasks to an Excel .xlsx file for reporting or sharing.
-
-taskite is ideal for individuals or small teams seeking a minimalist alternative to more complex project management tools.
+It's ideal for individuals or small teams who need a fast, privacy-friendly task tracker without the overhead of cloud logins or bloated features.
 
 ## What's New
 
@@ -13,22 +11,28 @@ taskite is ideal for individuals or small teams seeking a minimalist alternative
 
 ## Features
 
-- **Add Tasks**: Easily add new tasks to the Backlog, In Progress, or Done lists.
-- **Update Task Content**: Edit the content of existing tasks.
-- **Change Task Status**: Update task status either manually using a dropdown or by dragging and dropping tasks between lists.
-- **Delete Tasks**: Remove tasks from the lists.
-- **Data Persistence**: All tasks are saved in local storage to ensure data is retained even after refreshing the page.
-- **Save as Backup**: Exports the current board state as a .json backup file.
-- **Export to Excel**: Enables exporting the board to an .xlsx file using the SheetJS (XLSX) package.
-- **Restore from Backup**: Allows importing backup .json files to load board data.
+- **Task Management**: Add, edit, delete, and move tasks between Backlog, In Progress, and Done.
+- **Drag and Drop**: Easily move tasks between lists using smooth drag-and-drop.
+- **Inline Editing**: Edit task content directly without needing a separate form.
+- **100% Local & Private**: All data stays in your browser, ensuring offline access and persistence across sessions.
+- **Export Options**: Save your task board as a `.json` backup or export it to `.xlsx`.
+- **Backup Import**: Load a `.json` file to restore a previously saved task board.
+- **PWA Support**: Install it on your desktop or phone, use it offline, and get background updates automatically.
+- **State Management**: Centralized task state is handled for consistency and performance.
+- **Tested and Reliable**: Unit and component tests cover core functionality and UI behavior.
 
 ## Technologies Used
 
-- **Create React App**: For bootstrapping the project.
-- **Font Awesome**: For icons.
-- **React**: For building the user interface.
-- **React DnD**: For implementing drag-and-drop functionality.
-- **Redux**: For state management.
-- **SheetJS (XLSX)**: For handling Excel file generation.
-- **Tailwind CSS 4**: For styling the application.
-- **Toastify**: To display status notifications.
+- **Font Awesome**: Adds clean, vector icons to UI components like buttons.
+- **jsdom**: Simulates a browser-like environment in Node.js for DOM-based testing.
+- **React**: For building components, managing interaction, and state-based rendering.
+- **React DnD**: Enables task drag-and-drop between lists, including drop targets and preview behaviors.
+- **React Testing Library**: Simplifies testing user interactions and DOM behavior with a React-friendly API.
+- **React Toastify**: Provides non-blocking feedback like success/error toasts.
+- **Redux Toolkit**: Manages task data, selected task, and UI state. Reduces boilerplate vs plain Redux.
+- **SheetJS (xlsx)**: Converts task data to `.xlsx` for easy report export.
+- **SWC (via Vite)**: A super-fast JS/TS compiler replacing Babel, used for fast transpilation.
+- **Tailwind CSS 4**: For rapidly styling components with minimal custom CSS.
+- **Vite**: Lightning-fast dev server and build tool with instant HMR and optimized bundling.
+- **vite-plugin-pwa**: Adds PWA support: offline caching, app install, manifest generation.
+- **Vitest**: Fast, Vite-native unit test runner with Jest-like syntax.

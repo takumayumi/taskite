@@ -1,4 +1,4 @@
-import BMCIcon from "../assets/bmc-button.svg";
+import BMCIcon from "../../public/assets/bmc-button.svg";
 
 const Footer = () => {
   return (
