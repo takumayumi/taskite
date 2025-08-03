@@ -23,19 +23,19 @@ Perfect for individuals or small teams, taskite is a fast, privacy-friendly solu
 
 ## Technologies Used
 
-- **React**: UI component system and state-based rendering.
-- **Redux Toolkit**: Centralized state management.
-- **React DnD**: Drag-and-drop functionality.
-- **Tailwind CSS 4**: Utility-first styling.
 - **Font Awesome**: Clean, scalable icons.
+- **jsdom**: DOM simulation for testing environments.
+- **React**: UI component system and state-based rendering.
+- **React DnD**: Drag-and-drop functionality.
+- **React Testing Library**: Easy and accessible DOM interaction testing.
 - **React Toastify**: Toast messages for user feedback.
+- **Redux Toolkit**: Centralized state management.
 - **SheetJS (xlsx)**: Data export to `.xlsx`.
 - **SWC (via Vite)**: Fast JavaScript/TypeScript compilation.
+- **Tailwind CSS 4**: Utility-first styling.
 - **Vite**: Ultra-fast dev server and build tool.
 - **vite-plugin-pwa**: Adds offline support and PWA install capabilities.
 - **Vitest**: Lightweight unit test runner with fast performance.
-- **React Testing Library**: Easy and accessible DOM interaction testing.
-- **jsdom**: DOM simulation for testing environments.
 
 ## Project Status
 
