@@ -34,12 +34,10 @@ describe("Title", () => {
   it("renders the title visually", () => {
     renderWithStore();
 
-    // Option 1: safer and more specific
     expect(
       screen.getByRole("heading", { name: /taskite/i }),
     ).toBeInTheDocument();
 
-    // Option 2: if you want to assert both
     expect(screen.getAllByText("taskite")).toHaveLength(2);
   });
 });
