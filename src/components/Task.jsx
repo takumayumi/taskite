@@ -119,6 +119,7 @@ const Task = ({ task }) => {
         isDragging ? "cursor-grabbing" : "cursor-grab"
       }`}
       ref={drag}
+      data-testid="task"
     >
       <div className="relative flex flex-col gap-4">
         <span

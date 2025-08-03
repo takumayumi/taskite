@@ -10,6 +10,8 @@ const InfoModal = () => {
     dispatch(setShowPrompt(null));
   };
 
+  if (showPrompt !== "info") return null;
+
   return (
     <div
       className={classNames(

@@ -24,7 +24,11 @@ const TaskList = ({ status, tasks }) => {
       )}
     >
       {/* Task Status */}
-      <div className="flex items-center gap-4 font-bold transition-colors duration-200 ease-linear">
+      <div
+        className="flex items-center gap-4 font-bold transition-colors duration-200 ease-linear"
+        role="region"
+        aria-label={`${status} column`}
+      >
         <h2
           className={classNames(
             "text-lg font-semibold lg:text-xl",

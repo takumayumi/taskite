@@ -49,6 +49,7 @@ const ImportPrompt = () => {
         type="file"
         accept="application/json"
         className="hidden"
+        data-testid="file-input"
         onChange={handleFileChange}
       />
 
