@@ -1,10 +1,18 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import InfoModal from "../InfoModal";
-import { configureStore } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
-import taskReducer, { setShowPrompt } from "../../redux/taskSlice";
-import { vi } from "vitest";
+/**
+ * InfoModal.test.jsx
+ * Unit tests for the InfoModal component.
+ *
+ * Author: Yumi Takuma
+ */
 
+import { configureStore } from "@reduxjs/toolkit";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { vi } from "vitest";
+import InfoModal from "../InfoModal";
+import taskReducer, { setShowPrompt } from "../../redux/taskSlice";
+
+// Helper function to render with mocked Redux store
 const renderWithStore = (preloadedState) => {
   const store = configureStore({
     reducer: { taskite: taskReducer },

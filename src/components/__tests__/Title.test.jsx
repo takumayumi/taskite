@@ -1,11 +1,18 @@
+/**
+ * XLSXButton.test.jsx
+ * Unit test for the XLSXButton component that exports tasks to an Excel file.
+ *
+ * Author: Yumi Takuma
+ */
+
+import { configureStore } from "@reduxjs/toolkit";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import taskReducer from "../../redux/taskSlice";
-import XLSXButton from "../XLSXButton";
 import { vi } from "vitest";
+import XLSXButton from "../XLSXButton";
+import taskReducer from "../../redux/taskSlice";
 
-// Mock xlsx
+// Mock the xlsx module to avoid actual file writing
 vi.mock("xlsx", () => ({
   writeFile: vi.fn(),
   utils: {
@@ -17,6 +24,7 @@ vi.mock("xlsx", () => ({
 
 import * as XLSX from "xlsx";
 
+// Utility function to render XLSXButton with a preloaded Redux store
 const renderWithStore = (preloadedState = {}) => {
   const store = configureStore({
     reducer: { taskite: taskReducer },

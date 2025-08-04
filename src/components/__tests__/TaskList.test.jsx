@@ -1,22 +1,30 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { Provider } from "react-redux";
+/**
+ * TaskList.test.jsx
+ * Unit tests for the TaskList component.
+ *
+ * Author: Yumi Takuma
+ */
+
 import { configureStore } from "@reduxjs/toolkit";
-import taskReducer, { addTask, updateStatus } from "../../redux/taskSlice";
-import TaskList from "../TaskList";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { DndProvider } from "react-dnd";
 import { TestBackend } from "react-dnd-test-backend";
+import { Provider } from "react-redux";
 import { vi } from "vitest";
+import TaskList from "../TaskList";
+import taskReducer, { addTask, updateStatus } from "../../redux/taskSlice";
 
-// Mock FontAwesomeIcon to prevent SVG rendering errors
+// Mock FontAwesomeIcon to prevent rendering issues with SVG
 vi.mock("@fortawesome/react-fontawesome", () => ({
   FontAwesomeIcon: () => <span data-testid="icon" />,
 }));
 
-// Mock Task to isolate TaskList behavior
+// Mock Task component to isolate TaskList logic
 vi.mock("./Task", () => ({
   default: ({ task }) => <div data-testid="task">{task.content}</div>,
 }));
 
+// Helper function to render TaskList with Redux and DnD providers
 const renderWithProviders = (props = {}) => {
   const store = configureStore({
     reducer: { taskite: taskReducer },
@@ -88,13 +96,9 @@ describe("TaskList", () => {
   it("dispatches updateStatus when a task is dropped", () => {
     const { dispatchSpy } = renderWithProviders({ status: "Done", tasks: [] });
 
-    // Simulate drag-and-drop manually
-    const dropZone =
-      screen.getByRole("region") || screen.getByText("Done").closest("div");
-    // eslint-disable-next-line no-unused-vars
-    const dropHandler = dropZone?.getAttribute("ref"); // Not directly usable, skip UI and call dispatch manually
-
+    // Simulate drag-and-drop manually since TestBackend doesn't trigger drop UI
     const draggedTask = { id: "1", status: "Backlog" };
+
     dispatchSpy.mockClear();
     dispatchSpy(updateStatus({ task: draggedTask, newStatus: "Done" }));
 
