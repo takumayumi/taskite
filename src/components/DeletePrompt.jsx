@@ -6,6 +6,7 @@
  */
 
 import classNames from "classnames";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteTask, setSelectedTask, setShowPrompt } from "../redux/taskSlice";
 

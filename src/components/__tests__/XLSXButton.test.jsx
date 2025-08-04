@@ -8,6 +8,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Title from "../Title";
 import { configureStore } from "@reduxjs/toolkit";
+import React from "react";
 import { Provider } from "react-redux";
 import taskReducer, { setShowPrompt } from "../../redux/taskSlice";
 import { vi } from "vitest";

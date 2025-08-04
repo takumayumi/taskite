@@ -6,7 +6,7 @@
  * Author: Yumi Takuma
  */
 
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { registerSW } from "virtual:pwa-register";

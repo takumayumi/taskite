@@ -9,6 +9,8 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
+import PropTypes from "prop-types";
+import React from "react";
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import Task from "./Task";
@@ -70,6 +72,18 @@ const TaskList = ({ status, tasks }) => {
       </div>
     </div>
   );
+};
+
+TaskList.propTypes = {
+  status: PropTypes.string.isRequired,
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      created: PropTypes.number.isRequired,
+      status: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default TaskList;

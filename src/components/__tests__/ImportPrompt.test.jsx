@@ -7,6 +7,7 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import React from "react";
 import { Provider } from "react-redux";
 import { vi } from "vitest";
 import ImportPrompt from "../ImportPrompt";

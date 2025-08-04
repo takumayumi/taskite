@@ -7,6 +7,7 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import { render, screen, fireEvent } from "@testing-library/react";
+import React from "react";
 import { DndProvider } from "react-dnd";
 import { TestBackend } from "react-dnd-test-backend";
 import { Provider } from "react-redux";

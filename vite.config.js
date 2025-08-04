@@ -1,3 +1,10 @@
+/**
+ * vite.config.js
+ * Vite configuration for taskite with React, Tailwind CSS, and PWA support.
+ *
+ * Author: Yumi Takuma
+ */
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import tailwindcss from "@tailwindcss/vite";

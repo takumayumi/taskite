@@ -13,6 +13,7 @@
 
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 import { useDrag } from "react-dnd";
 import { useDispatch } from "react-redux";
@@ -209,6 +210,16 @@ const Task = ({ task }) => {
       </div>
     </div>
   );
+};
+
+Task.propTypes = {
+  task: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    created: PropTypes.number,
+    updated: PropTypes.number,
+    status: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Task;

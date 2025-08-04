@@ -7,6 +7,7 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import { render, screen, fireEvent } from "@testing-library/react";
+import React from "react";
 import { Provider } from "react-redux";
 import DeletePrompt from "../DeletePrompt";
 import reducer from "../../redux/taskSlice";

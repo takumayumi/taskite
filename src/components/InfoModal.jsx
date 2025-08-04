@@ -7,6 +7,7 @@
  */
 
 import classNames from "classnames";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setShowPrompt } from "../redux/taskSlice";
 
@@ -52,7 +53,7 @@ const InfoModal = () => {
           </ul>
           <p className="text-indigo">
             Be careful: clearing your browser data will permanently delete your
-            tasks, unless you've exported a backup.
+            tasks, unless you&apos;ve exported a backup.
           </p>
         </div>
         <div className="popup-buttons">

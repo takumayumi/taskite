@@ -6,6 +6,7 @@
  * Author: Yumi Takuma
  */
 
+import React from "react";
 import { useDispatch } from "react-redux";
 import { setShowPrompt } from "../redux/taskSlice";
 
