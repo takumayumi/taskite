@@ -1,3 +1,11 @@
+/**
+ * store.ts
+ * Configures the Redux store.
+ * Registers the task reducer under the "taskite" namespace.
+ *
+ * Author: Yumi Takuma
+ */
+
 import { configureStore } from "@reduxjs/toolkit";
 import taskReducer from "./taskSlice";
 

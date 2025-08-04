@@ -1,3 +1,11 @@
+/**
+ * App.jsx
+ * Main application container.
+ * Handles layout, drag-and-drop context, responsive logic, and global modals.
+ *
+ * Author: Yumi Takuma
+ */
+
 import { lazy, Suspense, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";

@@ -1,3 +1,11 @@
+/**
+ * taskSlice.test.ts
+ * Unit tests for taskSlice reducer actions.
+ * Verifies task state logic: CRUD, status updates, and localStorage sync.
+ *
+ * Author: Yumi Takuma
+ */
+
 import reducer, {
   addTask,
   deleteTask,
@@ -10,7 +18,7 @@ import reducer, {
   updateWidth,
 } from "../taskSlice";
 
-// Mock localStorage
+// Mock localStorage for state persistence
 const localStorageMock = (() => {
   let store = {};
   return {
@@ -25,7 +33,7 @@ const localStorageMock = (() => {
 })();
 Object.defineProperty(global, "localStorage", { value: localStorageMock });
 
-// Mock toast
+// Mock toast notifications to avoid actual popups during test
 vi.mock("react-toastify", () => ({
   toast: {
     success: vi.fn(),

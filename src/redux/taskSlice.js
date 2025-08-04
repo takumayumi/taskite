@@ -1,10 +1,17 @@
+/**
+ * taskSlice.ts
+ * Redux slice for managing task state.
+ * Handles task CRUD operations, localStorage sync, modal states, and responsive width tracking.
+ *
+ * Author: Yumi Takuma
+ */
+
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-// Load from localStorage with fallback
+// Load state from localStorage or use fallback defaults
 const stored = JSON.parse(localStorage.getItem("taskite")) || {};
 
-// Initial state
 const initialState = {
   selectedTask: null,
   showPrompt: stored.showPrompt ?? null,
@@ -12,13 +19,13 @@ const initialState = {
   width: window.innerWidth,
 };
 
-// Helper to persist to localStorage
+// Save task state to localStorage (excluding transient UI state)
 const updateLocalStorage = (state) => {
   localStorage.setItem(
     "taskite",
     JSON.stringify({
       tasks: state.tasks,
-    })
+    }),
   );
 };
 
@@ -43,7 +50,7 @@ const taskSlice = createSlice({
     deleteTask: (state) => {
       for (const status in state.tasks) {
         state.tasks[status] = state.tasks[status].filter(
-          (task) => task.id !== state.selectedTask.id
+          (task) => task.id !== state.selectedTask.id,
         );
       }
       updateLocalStorage(state);
@@ -86,6 +93,8 @@ const taskSlice = createSlice({
     updateContent: (state, action) => {
       const { task, content } = action.payload;
       const { id, status } = task;
+
+      // Update task content only if it has changed
       state.tasks[status] = state.tasks[status].map((task) => {
         if (task.id === id) {
           if (task.content !== content) {
@@ -98,13 +107,14 @@ const taskSlice = createSlice({
         }
         return task;
       });
+
       updateLocalStorage(state);
     },
 
     updateCreated: (state, action) => {
       const { id, status } = action.payload;
       state.tasks[status] = state.tasks[status].map((task) =>
-        task.id === id ? { ...task, created: new Date().toString() } : task
+        task.id === id ? { ...task, created: new Date().toString() } : task,
       );
       updateLocalStorage(state);
     },
@@ -112,6 +122,8 @@ const taskSlice = createSlice({
     updateStatus: (state, action) => {
       const { task, newStatus } = action.payload;
       const { id } = task;
+
+      // Find and remove the task from its current status list
       const taskToUpdate = Object.values(state.tasks)
         .flat()
         .find((task) => task.id === id);
@@ -119,10 +131,11 @@ const taskSlice = createSlice({
 
       for (const status in state.tasks) {
         state.tasks[status] = state.tasks[status].filter(
-          (task) => task.id !== id
+          (task) => task.id !== id,
         );
       }
 
+      // Add task to new status column
       if (!state.tasks[newStatus]) {
         state.tasks[newStatus] = [];
       }

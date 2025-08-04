@@ -1,3 +1,11 @@
+/**
+ * main.jsx
+ * Entry point.
+ * Sets up React root, Redux provider, and registers the PWA service worker.
+ *
+ * Author: Yumi Takuma
+ */
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";

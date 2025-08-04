@@ -1,3 +1,11 @@
+/**
+ * index.css
+ * Tailwind CSS directives and global overrides.
+ * Applies base, components, and utility styles app-wide.
+ * 
+ * Author: Yumi Takuma
+ */
+
 @import "tailwindcss";
 
 @theme {
