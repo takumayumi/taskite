@@ -1,5 +1,5 @@
 /**
- * taskSlice.test.ts
+ * taskSlice.test.js
  * Unit tests for taskSlice reducer actions.
  * Verifies task state logic: CRUD, status updates, and localStorage sync.
  *

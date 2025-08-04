@@ -1,3 +1,10 @@
+/**
+ * Footer.jsx
+ * Displays the footer containing the Buy Me a Coffee icon/button.
+ *
+ * Author: Yumi Takuma
+ */
+
 import BMCIcon from "../../public/assets/bmc-button.svg";
 
 const Footer = () => {

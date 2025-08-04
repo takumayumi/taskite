@@ -1,5 +1,13 @@
+/**
+ * xlsx.js
+ * Vitest mock setup for the 'xlsx' library used in XLSXButton tests.
+ *
+ * Author: Yumi Takuma
+ */
+
 import { vi } from "vitest";
 
+// Mocking the 'xlsx' module to isolate component tests from actual file generation logic.
 vi.mock("xlsx", async (importOriginal) => {
   const actual = await importOriginal();
   return {

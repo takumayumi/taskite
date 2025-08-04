@@ -1,11 +1,18 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import ImportPrompt from "../ImportPrompt";
-import { configureStore } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
-import taskReducer, { setShowPrompt, importTasks } from "../../redux/taskSlice";
-import { vi } from "vitest";
+/**
+ * ImportPrompt.test.jsx
+ * Unit tests for the ImportPrompt component.
+ *
+ * Author: Yumi Takuma
+ */
 
-// Mock FileReader
+import { configureStore } from "@reduxjs/toolkit";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { vi } from "vitest";
+import ImportPrompt from "../ImportPrompt";
+import taskReducer, { setShowPrompt, importTasks } from "../../redux/taskSlice";
+
+// Mock FileReader to simulate file loading
 class MockFileReader {
   readAsText = vi.fn(function () {
     this.onload({ target: { result: '{"test":"data"}' } });
@@ -13,7 +20,7 @@ class MockFileReader {
 }
 vi.stubGlobal("FileReader", MockFileReader);
 
-// Mock Redux actions
+// Mock importTasks action
 vi.mock("../../redux/taskSlice", async () => {
   const actual = await vi.importActual("../../redux/taskSlice");
   return {
@@ -23,6 +30,7 @@ vi.mock("../../redux/taskSlice", async () => {
   };
 });
 
+// Helper to render component with mocked store
 const renderWithStore = (preloadedState = {}) => {
   const store = configureStore({
     reducer: { taskite: taskReducer },
@@ -52,6 +60,7 @@ describe("ImportPrompt", () => {
       },
     });
 
+    // Check that confirmation prompt is visible
     expect(screen.getByText(/replace all \(3\) tasks\?/i)).toBeInTheDocument();
   });
 
@@ -67,14 +76,14 @@ describe("ImportPrompt", () => {
       taskite: { showPrompt: "import", tasks: {} },
     });
 
-    // Click the "Yes" button to trigger file input logic
+    // Click "Yes" to trigger the hidden input
     fireEvent.click(screen.getByText("Yes"));
 
-    // Find the hidden input via test ID
+    // Grab the hidden file input
     const fileInput = screen.getByTestId("file-input");
     expect(fileInput).toBeInTheDocument();
 
-    // Simulate file upload
+    // Simulate a file upload
     const file = new File(['{"test":"data"}'], "tasks.json", {
       type: "application/json",
     });

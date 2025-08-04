@@ -1,7 +1,20 @@
+/**
+ * Task.jsx
+ * A draggable task card component.
+ * Features:
+ * - Inline content editing with dynamic height resizing
+ * - Status change dropdown
+ * - Timestamp display
+ * - Drag-and-drop support
+ * - Contextual action menu
+ *
+ * Author: Yumi Takuma
+ */
+
+import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { useDrag } from "react-dnd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import {
   setSelectedTask,
@@ -14,6 +27,8 @@ import classNames from "classnames";
 
 const Task = ({ task }) => {
   const dispatch = useDispatch();
+
+  // Enable drag behavior for the task
   const [{ isDragging }, drag] = useDrag({
     type: "TASK",
     item: { id: task.id, status: task.status },
@@ -38,6 +53,7 @@ const Task = ({ task }) => {
     }
   };
 
+  // Edit task title and resize input height
   const handleTextChange = (e) => {
     const text = textRef.current;
     const input = e.target;
@@ -76,6 +92,7 @@ const Task = ({ task }) => {
     }
   }, [isDragging]);
 
+  // Auto-focus new tasks and sync input height with text size
   useEffect(() => {
     const input = inputRef.current;
 

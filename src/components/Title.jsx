@@ -1,9 +1,18 @@
+/**
+ * Title.jsx
+ * Displays the app title with a layered text effect.
+ * Clicking the title opens the info prompt modal.
+ *
+ * Author: Yumi Takuma
+ */
+
 import { useDispatch } from "react-redux";
 import { setShowPrompt } from "../redux/taskSlice";
 
 const Title = () => {
   const dispatch = useDispatch();
 
+  // Open info modal on title click
   const handleClick = () => {
     dispatch(setShowPrompt("info"));
   };

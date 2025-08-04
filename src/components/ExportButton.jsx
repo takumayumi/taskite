@@ -1,6 +1,13 @@
-import { useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+/**
+ * ExportButton.jsx
+ * Exports the current tasks to a JSON file for backup.
+ *
+ * Author: Yumi Takuma
+ */
+
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from "react-redux";
 
 const ExportButton = () => {
   const taskite = useSelector((state) => state.taskite);

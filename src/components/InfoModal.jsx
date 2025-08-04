@@ -1,6 +1,14 @@
+/**
+ * InfoModal.jsx
+ * Displays a modal with app information.
+ * Only visible when `showPrompt` is set to "info" in Redux state.
+ *
+ * Author: Yumi Takuma
+ */
+
+import classNames from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 import { setShowPrompt } from "../redux/taskSlice";
-import classNames from "classnames";
 
 const InfoModal = () => {
   const dispatch = useDispatch();

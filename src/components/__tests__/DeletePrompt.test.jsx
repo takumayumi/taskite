@@ -1,9 +1,17 @@
+/**
+ * DeletePrompt.test.jsx
+ * Tests for the DeletePrompt component.
+ *
+ * Author: Yumi Takuma
+ */
+
+import { configureStore } from "@reduxjs/toolkit";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
 import DeletePrompt from "../DeletePrompt";
-import { configureStore } from "@reduxjs/toolkit";
 import reducer from "../../redux/taskSlice";
 
+// Helper to render component with a test Redux store
 function renderWithStore(initialState) {
   const store = configureStore({
     reducer: { taskite: reducer },
@@ -19,6 +27,7 @@ function renderWithStore(initialState) {
   };
 }
 
+// Should show the delete confirmation when showPrompt is "delete"
 test('renders DeletePrompt when showPrompt is "delete"', () => {
   renderWithStore({
     taskite: {
@@ -33,6 +42,7 @@ test('renders DeletePrompt when showPrompt is "delete"', () => {
   expect(screen.getByText(/no/i)).toBeInTheDocument();
 });
 
+// Clicking "No" should cancel the prompt (sets showPrompt to null)
 test('clicking "No" hides the prompt', () => {
   const { store } = renderWithStore({
     taskite: {

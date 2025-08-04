@@ -1,5 +1,5 @@
 /**
- * taskSlice.ts
+ * taskSlice.js
  * Redux slice for managing task state.
  * Handles task CRUD operations, localStorage sync, modal states, and responsive width tracking.
  *

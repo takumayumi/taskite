@@ -1,6 +1,13 @@
+/**
+ * DeletePrompt.jsx
+ * Confirmation modal for deleting a task from the board.
+ *
+ * Author: Yumi Takuma
+ */
+
+import classNames from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteTask, setSelectedTask, setShowPrompt } from "../redux/taskSlice";
-import classNames from "classnames";
 
 const DeletePrompt = () => {
   const dispatch = useDispatch();

@@ -1,9 +1,17 @@
-import { useSelector, useDispatch } from "react-redux";
-import { importTasks, setShowPrompt } from "../redux/taskSlice";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+/**
+ * ImportPrompt.jsx
+ * Displays a confirmation dialog before importing task data from a JSON file.
+ * Triggers a hidden file input to read and dispatch imported tasks.
+ *
+ * Author: Yumi Takuma
+ */
+
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { importTasks, setShowPrompt } from "../redux/taskSlice";
 
 const ImportPrompt = () => {
   const dispatch = useDispatch();
@@ -29,7 +37,9 @@ const ImportPrompt = () => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (!file) return;
+
     const reader = new FileReader();
+
     reader.onload = (e) => {
       try {
         const importedJson = e.target.result;
@@ -38,6 +48,8 @@ const ImportPrompt = () => {
         console.error("Failed to import:", error);
       }
     };
+
+    // Read uploaded file as text to extract task data
     reader.readAsText(file);
   };
 

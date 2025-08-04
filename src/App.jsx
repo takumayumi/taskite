@@ -9,15 +9,15 @@
 import { lazy, Suspense, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { ToastContainer, Slide } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { updateWidth } from "./redux/taskSlice";
+import { ToastContainer, Slide } from "react-toastify";
 import ExportButton from "./components/ExportButton";
 import Footer from "./components/Footer";
 import ImportButton from "./components/ImportButton";
 import TaskList from "./components/TaskList";
 import Title from "./components/Title";
 import XLSXButton from "./components/XLSXButton";
+import { updateWidth } from "./redux/taskSlice";
 
 const DeletePrompt = lazy(() => import("./components/DeletePrompt"));
 const ImportPrompt = lazy(() => import("./components/ImportPrompt"));

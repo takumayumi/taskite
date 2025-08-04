@@ -1,5 +1,5 @@
 /**
- * store.ts
+ * store.js
  * Configures the Redux store.
  * Registers the task reducer under the "taskite" namespace.
  *

@@ -1,7 +1,14 @@
+/**
+ * ImportButton.jsx
+ * A button that triggers the import confirmation prompt to restore tasks from backup.
+ *
+ * Author: Yumi Takuma
+ */
+
+import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
 import { setShowPrompt } from "../redux/taskSlice";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 
 const ImportButton = () => {
   const dispatch = useDispatch();
