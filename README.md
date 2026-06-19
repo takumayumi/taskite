@@ -6,8 +6,8 @@ Perfect for individuals or small teams, taskite is a fast, privacy-friendly solu
 
 ## What's New
 
-- Migrated from **Create React App (CRA)** to **Vite + JS-SWC** for faster builds and a smoother development experience.
-- Upgraded from **Tailwind CSS 3** to **Tailwind CSS 4** to take advantage of the latest utilities and performance improvements.
+- Migrated from **Create React App (CRA)** to **Vite + JS-SWC**.
+- Upgraded from **Tailwind CSS 3** to **Tailwind CSS 4**.
 
 ## Features
 
