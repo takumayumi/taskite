@@ -43,4 +43,4 @@ This project is complete and no longer actively maintained. It remains available
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and share it for personal or educational purposes.
+[MIT](LICENSE) © 2026 takumayumi
